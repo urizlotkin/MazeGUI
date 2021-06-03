@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 public class MyViewController implements  IView {
     public TextField textField_mazeRows;
     public TextField textField_mazeColumns;
+    public MazeDisplayer mazeDisplayer;
+
 
 
     public void generateMaze(ActionEvent actionEvent) {
@@ -20,10 +22,12 @@ public class MyViewController implements  IView {
         // draw maze
         MyMazeGenerator genearte = new MyMazeGenerator();
         Maze maze = genearte.generate(rows,columns);
-        //mazeDisplayed.drawMaze(maze);
+        mazeDisplayer.drawMaze(maze.getMaze());
 
 
 
     }
 
+    public void solveMaze(ActionEvent actionEvent) {
+    }
 }
