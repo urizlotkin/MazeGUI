@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-
+<!--?import View.MazeDisplayer?-->
 <?import View.MazeDisplayer?>
-<BorderPane prefHeight="584.0" prefWidth="586.0" stylesheets="@ViewStyle.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="View.MyViewController">
+<BorderPane onMouseClicked="#mouseClick" prefHeight="584.0" prefWidth="586.0" stylesheets="@ViewStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <left>
         <VBox prefHeight="498.0" prefWidth="173.0" spacing="5.0" BorderPane.alignment="CENTER">
             <children>
@@ -30,6 +30,8 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <Label text="Maze rows:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                     <Label text="Maze columns:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
@@ -37,6 +39,9 @@
                     <TextField fx:id="textField_mazeColumns" text="50" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     <Button onAction="#generateMaze" prefHeight="25.0" prefWidth="167.0" text="Generate Maze" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
                     <Button cancelButton="true" onAction="#solveMaze" prefHeight="25.0" prefWidth="167.0" text="Solve Maze" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+               <Label layoutX="10.0" layoutY="16.0" text="Player row: " GridPane.rowIndex="4" />
+               <Label layoutX="10.0" layoutY="138.0" text="Player column:" GridPane.rowIndex="5" />
+
                 </GridPane>
             </children>
             <padding>
@@ -58,7 +63,8 @@
                     <menus>
                         <Menu mnemonicParsing="false" text="File">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Close" />
+                                <MenuItem mnemonicParsing="false" text="Load" />
+                        <MenuItem mnemonicParsing="false" text="Save" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Edit">
@@ -79,7 +85,7 @@
     <center>
         <Pane prefHeight="450.0" prefWidth="343.0" BorderPane.alignment="CENTER">
             <children>
-                <MazeDisplayer fx:id="mazeDisplayer" height="400.0" width="400.0" />
+                <MazeDisplayer fx:id="mazeDisplayer" onKeyPressed="#keyPress" imageFileNameWall="./Resources/Images/brickWall.jpg" imageFileNamePlayer="./Resources/Images/icyTower.png" height="400.0" width="400.0" />
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
