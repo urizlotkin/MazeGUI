@@ -33,7 +33,7 @@ public class MyModel extends Observable implements IModel {
     }
     @Override
     public void generateMaze(int row, int col) throws UnknownHostException {
-        Client client = new Client(InetAddress.getByName("1.0.0.127"), 5400, new IClientStrategy() {
+        Client client = new Client(InetAddress.getByName("127.0.0.1"), 5400, new IClientStrategy() {
             public void clientStrategy(InputStream inFromServer, OutputStream outToServer) {
                 try {
                     ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
@@ -54,13 +54,15 @@ public class MyModel extends Observable implements IModel {
 
             }
         });
+        client.communicateWithServer();
+        playerRow = 0;
+        playerCol = 0;
         setChanged();
-        notifyObservers("new Maze generated");
+        notifyObservers("Maze generated");
     }
 
-    public void solveMaze() {
-            try {
-                Client client = new Client(InetAddress.getLocalHost(), 5401, new IClientStrategy() {
+    public void solveMaze() throws UnknownHostException {
+                Client client = new Client(InetAddress.getByName("127.0.0.1"), 5401, new IClientStrategy() {
                     public void clientStrategy(InputStream inFromServer, OutputStream outToServer) {
                         try {
                             ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
@@ -75,11 +77,9 @@ public class MyModel extends Observable implements IModel {
 
                     }
                 });
-            } catch (UnknownHostException var1) {
-                var1.printStackTrace();
-            }
+        client.communicateWithServer();
         setChanged();
-        notifyObservers("Maze solved");
+        notifyObservers("maze solved");
         }
 
     public void saveCurrentMaze() {
@@ -100,20 +100,36 @@ public class MyModel extends Observable implements IModel {
     public void updatePlayerLocation(MovementDirection direction) {
         switch (direction) {
             case UP -> {
-                if (playerRow > 0)
+                if (playerRow > 0 && maze.getMaze()[playerRow-1][playerCol] == 0)
                     movePlayer(playerRow - 1, playerCol);
             }
             case DOWN -> {
-                if (playerRow < maze.getMaze().length- 1)
+                if (playerRow < maze.getMaze().length- 1 && maze.getMaze()[playerRow+1][playerCol] == 0)
                     movePlayer(playerRow + 1, playerCol);
             }
             case LEFT -> {
-                if (playerCol > 0)
+                if (playerCol > 0 && maze.getMaze()[playerRow][playerCol-1] == 0)
                     movePlayer(playerRow, playerCol - 1);
             }
             case RIGHT -> {
-                if (playerCol < maze.getMaze()[0].length - 1)
+                if (playerCol < maze.getMaze()[0].length - 1 && maze.getMaze()[playerRow][playerCol+1] == 0)
                     movePlayer(playerRow, playerCol + 1);
+            }
+            case RIGHTDOWN -> {
+                if (playerCol < maze.getMaze()[0].length - 1 && playerRow < maze.getMaze().length-1 && maze.getMaze()[playerRow+1][playerCol+1] == 0)
+                    movePlayer(playerRow+1, playerCol + 1);
+            }
+            case RIGHTUP -> {
+                if (playerCol < maze.getMaze()[0].length - 1 && playerRow > 0 && maze.getMaze()[playerRow-1][playerCol+1] == 0)
+                    movePlayer(playerRow-1, playerCol + 1);
+            }
+            case LEFTDOWN -> {
+                if (playerCol > 0 && playerRow < maze.getMaze().length-1 && maze.getMaze()[playerRow+1][playerCol-1] == 0)
+                    movePlayer(playerRow+1, playerCol - 1);
+            }
+            case LEFTUP -> {
+                if (playerCol > 0 && playerRow > 0 && maze.getMaze()[playerRow-1][playerCol-1] == 0)
+                    movePlayer(playerRow-1, playerCol - 1);
             }
         }
 

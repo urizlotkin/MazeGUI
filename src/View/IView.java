@@ -1,4 +1,6 @@
 package View;
 
-public interface IView {
+import javafx.fxml.Initializable;
+
+public interface IView extends Initializable {
 }

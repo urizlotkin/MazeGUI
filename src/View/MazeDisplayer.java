@@ -1,5 +1,7 @@
 package View;
 
+import algorithms.search.MazeState;
+import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.Canvas;
@@ -13,10 +15,37 @@ import java.io.FileNotFoundException;
 public class MazeDisplayer extends Canvas {
     StringProperty imageFileNameWall = new SimpleStringProperty();
     StringProperty imageFileNamePlayer = new SimpleStringProperty();
+    StringProperty imageFinishPoint = new SimpleStringProperty();
+
+    public void setImageSolvePath(String imageSolvePath) {
+        this.imageSolvePath.set(imageSolvePath);
+    }
+
+    public String getImageSolvePath() {
+        return imageSolvePath.get();
+    }
+
+    public StringProperty imageSolvePathProperty() {
+        return imageSolvePath;
+    }
+
+    StringProperty imageSolvePath = new SimpleStringProperty();
     private int[][] maze;
     private int playerRow=0;
     private int playerCol=0;
+    private Solution sol = null;
 
+    public void setImageFinishPoint(String imageFinishPoint) {
+        this.imageFinishPoint.set(imageFinishPoint);
+    }
+
+    public String getImageFinishPoint() {
+        return imageFinishPoint.get();
+    }
+
+    public StringProperty imageFinishPointProperty() {
+        return imageFinishPoint;
+    }
     public int getPlayerRow() {
         return playerRow;
     }
@@ -24,7 +53,7 @@ public class MazeDisplayer extends Canvas {
     public int getPlayerCol() {
         return playerCol;
     }
-    public void setPlayerPosition(int row, int col){
+    public void setPlayerPosition(int row, int col) throws FileNotFoundException {
         this.playerCol = col;
         this.playerRow = row;
         draw();
@@ -49,12 +78,13 @@ public class MazeDisplayer extends Canvas {
     public MazeDisplayer(){
         super();
     }
-    public void drawMaze(int[][] maze) {
+    public void drawMaze(int[][] maze) throws FileNotFoundException {
         this.maze = maze;
+        this.sol = null;
         draw();
     }
 
-    private void draw() {
+    private void draw() throws FileNotFoundException {
         if(maze != null){
             double canvasHeight = getHeight();
             double canvasWidth = getWidth();
@@ -65,11 +95,26 @@ public class MazeDisplayer extends Canvas {
             double cellWidth = canvasWidth / cols;
 
             GraphicsContext graphicsContext = getGraphicsContext2D();
-            //clear the canvas:
             graphicsContext.clearRect(0, 0, canvasWidth, canvasHeight);
             drawMazeWalls(graphicsContext,cellHeight,cellWidth,rows,cols);
             drawPlayer(graphicsContext,cellHeight,cellWidth);
+            drawEndPoint(graphicsContext,cellHeight,cellWidth);
+            if(sol != null)
+                drawSolution(graphicsContext,cellHeight,cellWidth);
         }
+    }
+
+    private void drawSolution(GraphicsContext graphicsContext, double cellHeight, double cellWidth) throws FileNotFoundException {
+        Image solvePath = new Image(new FileInputStream(getImageSolvePath()));
+        for (int i = 0; i < sol.getSolutionPath().size()-1;i ++) {
+            graphicsContext.drawImage(solvePath, cellWidth* ((MazeState)(sol.getSolutionPath().get(i))).getPos().getRowIndex(), cellHeight*((MazeState)(sol.getSolutionPath().get(i))).getPos().getColumnIndex(), cellWidth, cellHeight);
+        }
+    }
+
+    private void drawEndPoint(GraphicsContext graphicsContext, double cellHeight, double cellWidth) throws FileNotFoundException {
+        //graphicsContext.setFill(Color.GREEN);
+        Image finishPoint = new Image(new FileInputStream(getImageFinishPoint()));
+        graphicsContext.drawImage(finishPoint, cellWidth* (maze.length-1), cellHeight*(maze[0].length-1), cellWidth, cellHeight);
     }
 
     private void drawMazeWalls(GraphicsContext graphicsContext, double cellHeight, double cellWidth, int rows, int cols) {
@@ -114,4 +159,8 @@ public class MazeDisplayer extends Canvas {
             graphicsContext.drawImage(playerImage, x, y, cellWidth, cellHeight);
     }
 
+    public void setSolution(Solution solution) throws FileNotFoundException {
+        this.sol = solution;
+        draw();
+    }
 }

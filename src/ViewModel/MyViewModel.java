@@ -9,10 +9,10 @@ import java.net.UnknownHostException;
 import java.util.Observable;
 import java.util.Observer;
 
-class ViewModel extends Observable implements Observer {
+public class MyViewModel extends Observable implements Observer {
     private IModel model;
 
-    public ViewModel(IModel model) {
+    public MyViewModel(IModel model) {
         this.model = model;
         this.model.assignObserver(this); //Observe the Model for it's changes
     }
@@ -46,10 +46,14 @@ class ViewModel extends Observable implements Observer {
     public void movePlayer(KeyEvent keyEvent){
         MovementDirection direction;
         switch (keyEvent.getCode()){
-            case UP -> direction = MovementDirection.UP;
-            case DOWN -> direction = MovementDirection.DOWN;
-            case LEFT -> direction = MovementDirection.LEFT;
-            case RIGHT -> direction = MovementDirection.RIGHT;
+            case NUMPAD8 -> direction = MovementDirection.UP;
+            case NUMPAD2 -> direction = MovementDirection.DOWN;
+            case NUMPAD4 -> direction = MovementDirection.LEFT;
+            case NUMPAD6 -> direction = MovementDirection.RIGHT;
+            case NUMPAD3 -> direction = MovementDirection.RIGHTDOWN;
+            case NUMPAD1 -> direction = MovementDirection.LEFTDOWN;
+            case NUMPAD7 -> direction = MovementDirection.LEFTUP;
+            case NUMPAD9 -> direction = MovementDirection.RIGHTUP;
             default -> {
                 // no need to move the player...
                 return;
@@ -58,7 +62,7 @@ class ViewModel extends Observable implements Observer {
         model.updatePlayerLocation(direction);
     }
 
-    public void solveMaze(){
+    public void solveMaze() throws UnknownHostException {
         model.solveMaze();
     }
 }

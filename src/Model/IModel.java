@@ -13,7 +13,7 @@ public interface IModel {
     int getPlayerRow();
     int getPlayerCol();
     void assignObserver(Observer o);
-    void solveMaze();
+    void solveMaze() throws UnknownHostException;
     Solution getSolution();
 
 
