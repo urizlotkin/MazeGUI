@@ -56,7 +56,7 @@ public class MazeDisplayer extends Canvas {
     public void setPlayerPosition(int row, int col) throws FileNotFoundException {
         this.playerCol = col;
         this.playerRow = row;
-        draw();
+        draw((int)Main.getPrimaryStage().getHeight()-100,(int)Main.getPrimaryStage().getWidth()-150);
     }
 
     public String getImageFileNameWall() {
@@ -81,11 +81,13 @@ public class MazeDisplayer extends Canvas {
     public void drawMaze(int[][] maze) throws FileNotFoundException {
         this.maze = maze;
         this.sol = null;
-        draw();
+        draw((int)Main.getPrimaryStage().getHeight()-100,(int)Main.getPrimaryStage().getWidth()-150);
     }
 
-    private void draw() throws FileNotFoundException {
+    public void draw(int height, int width) throws FileNotFoundException {
         if(maze != null){
+            this.setHeight(height-50);
+            this.setWidth(width - 50);
             double canvasHeight = getHeight();
             double canvasWidth = getWidth();
             int rows = maze.length;
@@ -161,6 +163,8 @@ public class MazeDisplayer extends Canvas {
 
     public void setSolution(Solution solution) throws FileNotFoundException {
         this.sol = solution;
-        draw();
+        draw((int)Main.getPrimaryStage().getHeight()-100,(int)Main.getPrimaryStage().getWidth()-150);
     }
+
+
 }

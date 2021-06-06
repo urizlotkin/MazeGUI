@@ -1,14 +1,14 @@
 package View;
 
 import ViewModel.MyViewModel;
+import algorithms.mazeGenerators.Maze;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -25,7 +25,7 @@ public class SaveContrroller extends AView implements IView, Observer {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        setViewModel(Main.getViewModel());
     }
 
     @Override
@@ -35,12 +35,21 @@ public class SaveContrroller extends AView implements IView, Observer {
     }
 
     public void saveMaze(ActionEvent actionEvent) throws IOException {
+      // setViewModel(Main.getViewModel());
         String name = mazeName.getText();
         FileOutputStream fileMaze = new FileOutputStream( "./resources"+ "/savedMazes/" + name);
         ObjectOutputStream createMazeFile = new ObjectOutputStream(fileMaze);
         createMazeFile.writeObject(viewModel.getMaze());
         createMazeFile.flush();
         createMazeFile.close();
+        viewModel.setMaze(null);
         switchSence("MyView.fxml");
     }
+
+    public void newMaze(ActionEvent actionEvent) throws IOException {
+        viewModel.setMaze(null);
+        switchSence("MyView.fxml");
+
+    }
+
 }

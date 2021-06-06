@@ -1,24 +1,20 @@
 package View;
-
+import Model.MyModel;
 import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.Maze;
-import com.sun.javafx.stage.EmbeddedWindow;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.Observable;
@@ -30,28 +26,45 @@ public class MyViewController extends AView implements  IView , Observer {
     public MyViewModel viewModel;
     public Button generateMaze;
     public Button solveMaze;
-
-    public void setViewModel(MyViewModel viewModel) {
-        this.viewModel = viewModel;
-        this.viewModel.addObserver( this);
-        this.solveMaze.setDisable(true);
-    }
     public TextField textField_mazeRows;
     public TextField textField_mazeColumns;
     public MazeDisplayer mazeDisplayer;
     public Label playerRow;
     public Label playerCol;
+    public BorderPane pane;
+    public Menu exit;
+    public MenuItem close;
+    public MenuItem about;
     StringProperty updatePlayerRow = new SimpleStringProperty();
     StringProperty updatePlayerCol = new SimpleStringProperty();
 
-    public static boolean isNumeric(String str) {
-        try {
-            Double.parseDouble(str);
-            return true;
-        } catch(NumberFormatException e){
-            return false;
-        }
+    public void setViewModel(MyViewModel viewModel) {
+        this.viewModel = viewModel;
+        this.viewModel.addObserver( this);
+        this.solveMaze.setDisable(true);
+        Main.getPrimaryStage().widthProperty().addListener(observable -> {
+            try {
+                changeSize();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
+        Main.getPrimaryStage().heightProperty().addListener(observable -> {
+            try {
+                changeSize();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
+        //this.generateMaze.prefHeightProperty().bind(pane.heightProperty());
+        //this.generateMaze.prefWidthProperty().bind(pane.widthProperty());
+
     }
+
+    private void changeSize() throws FileNotFoundException {
+        mazeDisplayer.draw((int)Main.getPrimaryStage().getHeight()-100,(int)Main.getPrimaryStage().getWidth()-150);
+    }
+
 
     public void generateMaze(ActionEvent actionEvent) throws UnknownHostException, FileNotFoundException {
         String rowText = textField_mazeRows.getText();
@@ -74,6 +87,8 @@ public class MyViewController extends AView implements  IView , Observer {
                 setUpdatePlayerCol(0);
                 setPlayerPosition(0, 0);
                 this.solveMaze.setDisable(false);
+                //this.mazeDisplayer.scaleXProperty().bind(pane.widthProperty());
+                //this.mazeDisplayer.scaleYProperty().bind(pane.heightProperty());
             }
         }
     }
@@ -130,6 +145,10 @@ public class MyViewController extends AView implements  IView , Observer {
                     e.printStackTrace();
                 }
             }
+            case "properties changed" -> {
+                    viewModel.stopServers();
+                    viewModel = new MyViewModel(new MyModel());
+            }
             default -> System.out.println("Not implemented change: " + change);
         }
     }
@@ -143,7 +162,7 @@ public class MyViewController extends AView implements  IView , Observer {
     }
 
     private void mazeGenerated() throws FileNotFoundException {
-        mazeDisplayer.drawMaze(viewModel.getMaze());
+        mazeDisplayer.drawMaze(viewModel.getMaze().getMaze());
     }
 
 
@@ -163,6 +182,59 @@ public class MyViewController extends AView implements  IView , Observer {
         else
         {
             switchSence("Save.fxml");
+            //viewModel.setMaze(null);
+
         }
+    }
+
+    public void loadFile(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Load maze");
+        //fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("maze file (*.maze)"))
+        fc.setInitialDirectory(new File("./resources/savedMazes"));
+        File chooser = fc.showOpenDialog(null);
+        if(chooser.getName() != null){
+            FileInputStream loadedMaze = new FileInputStream(chooser);
+            ObjectInputStream showMaze = new ObjectInputStream(loadedMaze);
+            Maze maze = (Maze)showMaze.readObject();
+            mazeDisplayer.drawMaze(maze.getMaze());
+            viewModel.setMaze(maze);
+            this.solveMaze.setDisable(false);
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Maze did not select");
+            alert.show();
+        }
+
+
+    }
+
+    public void openProperties(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Properties.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage proStage = new Stage();
+        proStage.setScene(new Scene(root, 200, 200));
+        proStage.show();
+    }
+
+    public void exit(ActionEvent actionEvent) {
+            System.exit(0);
+    }
+
+    public void about(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("About.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage proStage = new Stage();
+        proStage.setScene(new Scene(root, 200, 200));
+        proStage.show();
+    }
+
+    public void help(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Help.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage proStage = new Stage();
+        proStage.setScene(new Scene(root, 200, 200));
+        proStage.show();
     }
 }

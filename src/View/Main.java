@@ -7,11 +7,16 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 public class Main extends Application {
     private static Stage mainStage;
     private static MyViewModel viewModel;
+    private static MediaPlayer media;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -25,6 +30,11 @@ public class Main extends Application {
         viewModel = new MyViewModel(model);
         MyViewController view = fxmlLoader.getController();
         view.setViewModel(viewModel);
+        Media song = new Media(new File("resources/music/mainMusic.mp3").toURI().toString());
+        media = new MediaPlayer(song);
+        media.setAutoPlay(true);
+        media.setCycleCount(MediaPlayer.INDEFINITE);
+        media.play();
     }
     public static Stage getPrimaryStage(){
         return  mainStage;

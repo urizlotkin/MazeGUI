@@ -11,17 +11,23 @@ public abstract class AView implements IView {
 
     protected MyViewModel viewModel;
 
-    protected AView(){
-        viewModel = Main.getViewModel();
-    }
-
+    public AView(){this.viewModel = Main.getViewModel();}
     protected void switchSence(String fxmlName) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlName));
         Parent root = fxmlLoader.load();
         Main.getPrimaryStage().setScene(new Scene(root, 1000, 700));
         Main.getPrimaryStage().show();
         AView newView = fxmlLoader.getController();
-       // newView.setViewModel(viewModel);
+        newView.setViewModel(Main.getViewModel());
+    }
+
+    public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
     }
 
     public abstract void setViewModel(MyViewModel viewModel);

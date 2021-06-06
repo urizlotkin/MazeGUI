@@ -31,6 +31,10 @@ public class MyModel extends Observable implements IModel {
         this.generateMaze.start();
         this.solveSearchProblem.start();
     }
+    public void stopServers(){
+        this.generateMaze.stop();
+        this.solveSearchProblem.stop();
+    }
     @Override
     public void generateMaze(int row, int col) throws UnknownHostException {
         Client client = new Client(InetAddress.getByName("127.0.0.1"), 5400, new IClientStrategy() {
@@ -92,8 +96,8 @@ public class MyModel extends Observable implements IModel {
 
 
     @Override
-    public int[][] getMaze() {
-        return maze.getMaze();
+    public Maze getMaze() {
+        return maze;
     }
 
     @Override
@@ -164,6 +168,12 @@ public class MyModel extends Observable implements IModel {
     public Solution getSolution() {
         return solution;
     }
+
+
+    public void setMaze(Maze maze) {
+        this.maze = maze;
+    }
+
 
 }
 
