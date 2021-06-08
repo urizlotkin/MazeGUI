@@ -5,11 +5,13 @@ import IO.MyDecompressorInputStream;
 import Server.Server;
 import Server.ServerStrategyGenerateMaze;
 import Server.ServerStrategySolveSearchProblem;
+import View.MazeDisplayer;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.MyMazeGenerator;
 import algorithms.search.AState;
 import algorithms.search.Solution;
 import Client.IClientStrategy;
+import javafx.scene.input.MouseEvent;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -20,8 +22,8 @@ import java.util.Observer;
 
 public class MyModel extends Observable implements IModel {
     private Maze maze;
-    private int playerRow;
-    private int playerCol;
+    private int playerRow=0;
+    private int playerCol=0;
     private Solution solution;
     private Server generateMaze;
     private Server solveSearchProblem;
@@ -140,12 +142,34 @@ public class MyModel extends Observable implements IModel {
 
     }
 
+    public void setPlayerRow(int playerRow) {
+        this.playerRow = playerRow;
+    }
+
+    public void setPlayerCol(int playerCol) {
+        this.playerCol = playerCol;
+    }
+
     private void movePlayer(int row, int col) {
         this.playerRow = row;
         this.playerCol = col;
         setChanged();
         notifyObservers("player moved");
+        if(row == maze.getGoalPosition().getRowIndex() && col== maze.getGoalPosition().getColumnIndex()){
+            setChanged();
+            notifyObservers("finish maze");
+        }
+
     }
+    public boolean canMove(int row, int col){
+        if(row < 0 || col < 0 || row > maze.getRows()-1 || col > maze.getColumns() )
+            return false;
+        if(maze.getMaze()[row][col] == 0)
+            return true;
+        else
+            return false;
+    }
+
 
 
     @Override
@@ -173,7 +197,57 @@ public class MyModel extends Observable implements IModel {
     public void setMaze(Maze maze) {
         this.maze = maze;
     }
+    public void saveMaze(String name) throws IOException {
+        FileOutputStream fileMaze = new FileOutputStream( "./resources"+ "/savedMazes/" + name);
+        ObjectOutputStream createMazeFile = new ObjectOutputStream(fileMaze);
+        createMazeFile.writeObject(getMaze());
+        createMazeFile.flush();
+        createMazeFile.close();
+        setChanged();
+        notifyObservers("maze saved");
+    }
+
+    @Override
+    public void mouseDrag(MouseEvent mouseEvent, MazeDisplayer mazeDisplayer) {
+        if (mazeDisplayer == null || (playerRow == maze.getGoalPosition().getRowIndex() && playerCol == maze.getGoalPosition().getColumnIndex()))
+            return;
+        double[] pos = getCellSize(mazeDisplayer);
+        double mouseRow = (mouseEvent.getY());
+        double mouseCol = (mouseEvent.getX());
+        double cellHeight = pos[0];
+        double cellWidth = pos[1];
+        if (playerRow  < mouseRow/cellHeight && mouseRow/cellHeight <= playerRow + 2 && playerCol + 1 >= mouseCol/cellWidth && playerCol  <= mouseCol/cellWidth) {// down
+            if (canMove(playerRow + 1, playerCol))
+                movePlayer(playerRow + 1, playerCol);
+        }
+        if (playerRow > mouseRow/cellHeight && mouseRow/cellHeight + 2 >= playerRow&& playerCol + 1 >= mouseCol/cellWidth && playerCol  <= mouseCol/cellWidth) {// up
+            if (canMove(playerRow - 1, playerCol))
+                movePlayer(playerRow - 1, playerCol);
+        }
+        if (playerCol > mouseCol/cellWidth && mouseCol/cellWidth + 1 >= playerCol && playerRow + 1 >= mouseRow/cellHeight && playerRow <= mouseRow/cellHeight) {// left
+            if (canMove(playerRow , playerCol - 1))
+                movePlayer(playerRow , playerCol - 1);
+        }
+        if (playerCol + 1 < mouseCol/cellWidth && mouseCol/cellWidth  <= playerCol+2 && playerRow + 1 >= mouseRow/cellHeight && playerRow <= mouseRow/cellHeight) {// right
+            if (canMove(playerRow , playerCol + 1))
+                movePlayer(playerRow , playerCol + 1);
+        }
+    }
 
 
-}
+
+    private double[] getCellSize (MazeDisplayer mazeDisplayer){
+            double canvasHeight = mazeDisplayer.getHeight();
+            double canvasWidth = mazeDisplayer.getWidth();
+            int rows = maze.getMaze().length;
+            int cols = maze.getMaze()[0].length;
+            double cellHeight = canvasHeight / rows;
+            double cellWidth = canvasWidth / cols;
+            double[] a = new double[2];
+            a[0] = cellHeight;
+            a[1] = cellWidth;
+            return a;
+        }
+    }
+
 

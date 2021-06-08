@@ -9,9 +9,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.*;
@@ -35,6 +39,9 @@ public class MyViewController extends AView implements  IView , Observer {
     public Menu exit;
     public MenuItem close;
     public MenuItem about;
+    private boolean isSolved = false;
+    private boolean isShowSolution =false;
+    private boolean zoom= false;
     StringProperty updatePlayerRow = new SimpleStringProperty();
     StringProperty updatePlayerCol = new SimpleStringProperty();
 
@@ -62,8 +69,10 @@ public class MyViewController extends AView implements  IView , Observer {
     }
 
     private void changeSize() throws FileNotFoundException {
+        mazeDisplayer.setZoomNeededReset(true);
         mazeDisplayer.draw((int)Main.getPrimaryStage().getHeight()-100,(int)Main.getPrimaryStage().getWidth()-150);
     }
+
 
 
     public void generateMaze(ActionEvent actionEvent) throws UnknownHostException, FileNotFoundException {
@@ -97,8 +106,12 @@ public class MyViewController extends AView implements  IView , Observer {
         viewModel.solveMaze();
     }
     public void keyPress (KeyEvent keyEvent){
-        viewModel.movePlayer(keyEvent);
-        keyEvent.consume();
+        if(keyEvent.getCode() == KeyCode.CONTROL)
+            zoom = true;
+        else if(!(isSolved)) {
+            viewModel.movePlayer(keyEvent);
+            keyEvent.consume();
+        }
     }
 
     public void setPlayerPosition(int row, int col) throws FileNotFoundException {
@@ -149,12 +162,44 @@ public class MyViewController extends AView implements  IView , Observer {
                     viewModel.stopServers();
                     viewModel = new MyViewModel(new MyModel());
             }
+            case "finish maze" -> {
+                finishMaze();
+            }
+            case "maze saved" -> {
+                viewModel.setMaze(null);
+                try {
+                    switchSence("MyView.fxml");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             default -> System.out.println("Not implemented change: " + change);
         }
     }
 
+    private void finishMaze() {
+        Main.getMedia().setMute(true);
+        Media song = new Media(new File("./resources/music/we are cut.mp3").toURI().toString());
+        Main.setMedia(new MediaPlayer(song));
+        Main.getMedia().setAutoPlay(true);
+        Main.getMedia().setCycleCount(MediaPlayer.INDEFINITE);
+        Main.getMedia().play();
+        Main.getMedia().setMute(false);
+        isSolved = true;
+        solveMaze.setDisable(true);
+
+    }
+
     private void mazeSolved() throws FileNotFoundException {
-        mazeDisplayer.setSolution(viewModel.getSolution());
+        if(isShowSolution == false) {
+            mazeDisplayer.canDrawSolution();
+            mazeDisplayer.setSolution(viewModel.getSolution());
+            isShowSolution = true;
+        }
+        else {
+            mazeDisplayer.clearSolution();
+            isShowSolution = false;
+        }
     }
 
     private void playerMoved() throws FileNotFoundException {
@@ -163,6 +208,16 @@ public class MyViewController extends AView implements  IView , Observer {
 
     private void mazeGenerated() throws FileNotFoundException {
         mazeDisplayer.drawMaze(viewModel.getMaze().getMaze());
+        if(isSolved){
+            Main.getMedia().setMute(true);
+            Media song = new Media(new File("./resources/music/Lugia's Song.mp3").toURI().toString());
+            Main.setMedia(new MediaPlayer(song));
+            Main.getMedia().setAutoPlay(true);
+            Main.getMedia().setCycleCount(MediaPlayer.INDEFINITE);
+            Main.getMedia().play();
+            isSolved = false;
+            Main.getMedia().setMute(false);
+        }
     }
 
 
@@ -193,13 +248,30 @@ public class MyViewController extends AView implements  IView , Observer {
         //fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("maze file (*.maze)"))
         fc.setInitialDirectory(new File("./resources/savedMazes"));
         File chooser = fc.showOpenDialog(null);
+        if(chooser == null)
+            return;
         if(chooser.getName() != null){
             FileInputStream loadedMaze = new FileInputStream(chooser);
             ObjectInputStream showMaze = new ObjectInputStream(loadedMaze);
             Maze maze = (Maze)showMaze.readObject();
+            setUpdatePlayerRow(0);
+            setUpdatePlayerCol(0);
+            setPlayerPosition(0, 0);
+            viewModel.setPlayerCol(0);
+            viewModel.setPlayerRow(0);
             mazeDisplayer.drawMaze(maze.getMaze());
             viewModel.setMaze(maze);
             this.solveMaze.setDisable(false);
+            if(isSolved){
+                Main.getMedia().setMute(true);
+                Media song = new Media(new File("./resources/music/Lugia's Song.mp3").toURI().toString());
+                Main.setMedia(new MediaPlayer(song));
+                Main.getMedia().setAutoPlay(true);
+                Main.getMedia().setCycleCount(MediaPlayer.INDEFINITE);
+                Main.getMedia().play();
+                Main.getMedia().setMute(false);
+                isSolved = false;
+            }
         }
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -236,5 +308,18 @@ public class MyViewController extends AView implements  IView , Observer {
         Stage proStage = new Stage();
         proStage.setScene(new Scene(root, 200, 200));
         proStage.show();
+    }
+
+    public void mouseDrag(MouseEvent mouseEvent) {
+        viewModel.mouseDrag(mouseEvent, mazeDisplayer);
+    }
+
+    public void zoomOut(KeyEvent keyEvent) {
+        zoom = false;
+    }
+
+    public void scrollMouse(ScrollEvent scrollEvent) throws FileNotFoundException {
+        if(zoom)
+            mazeDisplayer.zoomInOut(scrollEvent);
     }
 }

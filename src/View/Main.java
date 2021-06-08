@@ -30,7 +30,7 @@ public class Main extends Application {
         viewModel = new MyViewModel(model);
         MyViewController view = fxmlLoader.getController();
         view.setViewModel(viewModel);
-        Media song = new Media(new File("resources/music/mainMusic.mp3").toURI().toString());
+        Media song = new Media(new File("./resources/music/Lugia's Song.mp3").toURI().toString());
         media = new MediaPlayer(song);
         media.setAutoPlay(true);
         media.setCycleCount(MediaPlayer.INDEFINITE);
@@ -42,8 +42,8 @@ public class Main extends Application {
     public static MyViewModel getViewModel(){
         return  viewModel;
     }
-
-
+    public static MediaPlayer getMedia() { return media;}
+    public static void setMedia(MediaPlayer media) { Main.media = media;}
     public static void main(String[] args) {
         launch(args);
     }

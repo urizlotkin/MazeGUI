@@ -1,11 +1,16 @@
 package ViewModel;
 
 import Model.IModel;
+
 import Model.MovementDirection;
+import View.MazeDisplayer;
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
 import javafx.scene.input.KeyEvent;
 import Model.MyModel;
+import javafx.scene.input.MouseEvent;
+
+import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Observable;
 import java.util.Observer;
@@ -17,6 +22,7 @@ public class MyViewModel extends Observable implements Observer {
         this.model = model;
         this.model.assignObserver(this); //Observe the Model for it's changes
     }
+
 
     @Override
     public void update(Observable o, Object arg) {
@@ -65,6 +71,12 @@ public class MyViewModel extends Observable implements Observer {
         }
         model.updatePlayerLocation(direction);
     }
+    public void setPlayerRow(int num){
+        model.setPlayerRow(num);
+    }
+    public void setPlayerCol(int num){
+        model.setPlayerCol(num);
+    }
 
     public void solveMaze() throws UnknownHostException {
         model.solveMaze();
@@ -72,5 +84,14 @@ public class MyViewModel extends Observable implements Observer {
 
     public void stopServers() {
         model.stopServers();
+    }
+
+    public void mouseDrag(MouseEvent mouseEvent, MazeDisplayer mazeDisplayer) {
+        model.mouseDrag(mouseEvent,mazeDisplayer);
+    }
+
+
+    public void saveMaze(String name) throws IOException {
+        model.saveMaze(name);
     }
 }

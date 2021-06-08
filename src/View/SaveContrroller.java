@@ -37,13 +37,7 @@ public class SaveContrroller extends AView implements IView, Observer {
     public void saveMaze(ActionEvent actionEvent) throws IOException {
       // setViewModel(Main.getViewModel());
         String name = mazeName.getText();
-        FileOutputStream fileMaze = new FileOutputStream( "./resources"+ "/savedMazes/" + name);
-        ObjectOutputStream createMazeFile = new ObjectOutputStream(fileMaze);
-        createMazeFile.writeObject(viewModel.getMaze());
-        createMazeFile.flush();
-        createMazeFile.close();
-        viewModel.setMaze(null);
-        switchSence("MyView.fxml");
+        viewModel.saveMaze(name);
     }
 
     public void newMaze(ActionEvent actionEvent) throws IOException {

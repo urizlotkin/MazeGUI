@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+
 <?import View.MazeDisplayer?>
 <BorderPane fx:id="pane" onMouseClicked="#mouseClick" prefHeight="584.0" prefWidth="586.0" stylesheets="@ViewStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <left>
@@ -75,13 +76,13 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Info">
                             <items>
-                                <MenuItem fx:id="about" onAction="#about" mnemonicParsing="false" text="About" />
-                        <MenuItem fx:id="help" onAction="#help" mnemonicParsing="false" text="Help" />
+                                <MenuItem fx:id="about" mnemonicParsing="false" onAction="#about" text="About" />
+                        <MenuItem fx:id="help" mnemonicParsing="false" onAction="#help" text="Help" />
                             </items>
                         </Menu>
                   <Menu mnemonicParsing="false" text="Exit">
                      <items>
-                        <MenuItem fx:id="close" onAction="#exit" mnemonicParsing="false" text="Close" />
+                        <MenuItem fx:id="close" mnemonicParsing="false" onAction="#exit" text="Close" />
                      </items>
                   </Menu>
                     </menus>
@@ -90,9 +91,9 @@
         </VBox>
     </top>
     <center>
-        <Pane prefHeight="450.0" prefWidth="343.0" BorderPane.alignment="CENTER">
+        <Pane onKeyReleased="#zoomOut" onMouseDragged="#mouseDrag" onScroll="#scrollMouse" prefHeight="450.0" prefWidth="343.0" scaleY="0.99" BorderPane.alignment="CENTER">
             <children>
-                <MazeDisplayer fx:id="mazeDisplayer" height="400.0" imageFileNamePlayer="./Resources/Images/icyTower.png" imageFileNameWall="./Resources/Images/brickWall.jpg" imageFinishPoint="./resources/Images/finishMazePoint.png" imageSolvePath="./resources/Images/solvePath.gif" onKeyPressed="#keyPress" width="400.0" />
+                <MazeDisplayer fx:id="mazeDisplayer" height="400.0" imageFileNamePlayer="./Resources/Images/ash.png" imageFileNameWall="./Resources/Images/grass.jpg" imageFinishPoint="./resources/Images/lugia.png" imageSolvePath="./resources/Images/solvePath.gif" onKeyPressed="#keyPress" width="400.0" />
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
