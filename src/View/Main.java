@@ -2,6 +2,7 @@ package View;
 
 import Model.IModel;
 import Model.MyModel;
+import Server.Configurations;
 import ViewModel.MyViewModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        //Configurations.getInstance().updateConfig("3","SimpleMaze","BestFirstSearch");
         this.mainStage = primaryStage;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();

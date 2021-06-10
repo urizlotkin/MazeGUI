@@ -5,6 +5,7 @@ import algorithms.mazeGenerators.Maze;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.transform.Scale;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.*;
@@ -36,9 +38,10 @@ public class MyViewController extends AView implements  IView , Observer {
     public Label playerRow;
     public Label playerCol;
     public BorderPane pane;
-    public Menu exit;
     public MenuItem close;
     public MenuItem about;
+    public ToggleButton muteButton;
+    public ScrollPane mainScrollPane;
     private boolean isSolved = false;
     private boolean isShowSolution =false;
     private boolean zoom= false;
@@ -63,9 +66,16 @@ public class MyViewController extends AView implements  IView , Observer {
                 e.printStackTrace();
             }
         });
-        //this.generateMaze.prefHeightProperty().bind(pane.heightProperty());
-        //this.generateMaze.prefWidthProperty().bind(pane.widthProperty());
-
+        mainScrollPane.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
+            @Override
+            public void handle(ScrollEvent event) {
+                try {
+                    scrollMouse(event);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                event.consume();
+            }});
     }
 
     private void changeSize() throws FileNotFoundException {
@@ -106,8 +116,9 @@ public class MyViewController extends AView implements  IView , Observer {
         viewModel.solveMaze();
     }
     public void keyPress (KeyEvent keyEvent){
-        if(keyEvent.getCode() == KeyCode.CONTROL)
+        if(keyEvent.getCode() == KeyCode.CONTROL) {
             zoom = true;
+        }
         else if(!(isSolved)) {
             viewModel.movePlayer(keyEvent);
             keyEvent.consume();
@@ -159,8 +170,8 @@ public class MyViewController extends AView implements  IView , Observer {
                 }
             }
             case "properties changed" -> {
-                    viewModel.stopServers();
-                    viewModel = new MyViewModel(new MyModel());
+                    //viewModel.stopServers();
+                    //viewModel = new MyViewModel(new MyModel());
             }
             case "finish maze" -> {
                 finishMaze();
@@ -313,13 +324,40 @@ public class MyViewController extends AView implements  IView , Observer {
     public void mouseDrag(MouseEvent mouseEvent) {
         viewModel.mouseDrag(mouseEvent, mazeDisplayer);
     }
-
     public void zoomOut(KeyEvent keyEvent) {
-        zoom = false;
+        if(zoom)
+            zoom = false;
     }
 
+
     public void scrollMouse(ScrollEvent scrollEvent) throws FileNotFoundException {
-        if(zoom)
+        if(zoom) {
             mazeDisplayer.zoomInOut(scrollEvent);
+            //scrollMaze(scrollEvent);
+        }
+    }
+
+    public void mute(ActionEvent actionEvent) {
+        if(muteButton.isSelected())
+            Main.getMedia().setMute(true);
+        else
+            Main.getMedia().setMute(false);
+    }
+
+    public void scrollMaze(ScrollEvent scrollEvent) {
+        double deltaY = scrollEvent.getDeltaY();
+        if (scrollEvent.isControlDown()) {
+            double zoomFactor = 1.05;
+            if (deltaY < 0) {
+                zoomFactor = 0.95;
+            }
+            Scale newScale = new Scale();
+            newScale.setPivotX(scrollEvent.getX());
+            newScale.setPivotY(scrollEvent.getY());
+            newScale.setX(mazeDisplayer.getScaleX() * zoomFactor);
+            newScale.setY(mazeDisplayer.getScaleY() * zoomFactor);
+            mazeDisplayer.getTransforms().add(newScale);
+            mazeDisplayer.getTransforms().add(newScale);
+        }
     }
 }

@@ -4,11 +4,15 @@ import algorithms.search.MazeState;
 import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Scale;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -206,6 +210,17 @@ public class MazeDisplayer extends Canvas {
             }
         }
         draw(Main.getPrimaryStage().getHeight() - 100 , Main.getPrimaryStage().getWidth() - 150);
+
     }
+
+    public void dragMaze(MouseEvent mouseEvent, Pane mainPane, double x, double y) {
+        double mouseX = mouseEvent.getX();
+        double mouseY = mouseEvent.getY();
+        Bounds boundsInScene = mainPane.localToScene(mainPane.getBoundsInLocal());
+        if(mouseX > boundsInScene.getMinX() - 175 && mouseY > boundsInScene.getMinY()-25) {
+            this.setLayoutX(mouseX-x);
+            this.setLayoutY(mouseY - y);
+        }
     }
+}
 

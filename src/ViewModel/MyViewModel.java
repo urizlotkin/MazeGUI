@@ -3,9 +3,11 @@ package ViewModel;
 import Model.IModel;
 
 import Model.MovementDirection;
+import Server.Configurations;
 import View.MazeDisplayer;
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
+import javafx.event.ActionEvent;
 import javafx.scene.input.KeyEvent;
 import Model.MyModel;
 import javafx.scene.input.MouseEvent;
@@ -82,10 +84,6 @@ public class MyViewModel extends Observable implements Observer {
         model.solveMaze();
     }
 
-    public void stopServers() {
-        model.stopServers();
-    }
-
     public void mouseDrag(MouseEvent mouseEvent, MazeDisplayer mazeDisplayer) {
         model.mouseDrag(mouseEvent,mazeDisplayer);
     }
@@ -93,5 +91,9 @@ public class MyViewModel extends Observable implements Observer {
 
     public void saveMaze(String name) throws IOException {
         model.saveMaze(name);
+    }
+
+    public void setProperties(String num, String mazeAlgo, String solveAlgo) throws IOException, InterruptedException {
+        model.setProperties(num,mazeAlgo,solveAlgo);
     }
 }

@@ -7,6 +7,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.control.ScrollPane?>
 <?import View.MazeDisplayer?>
 <BorderPane fx:id="pane" onMouseClicked="#mouseClick" prefHeight="584.0" prefWidth="586.0" stylesheets="@ViewStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <left>
@@ -44,6 +45,7 @@
                     <Label fx:id="playerRow" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                     <Label fx:id="playerCol" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 </GridPane>
+            <ToggleButton fx:id="muteButton" mnemonicParsing="false" text="Music on/off" onAction="#mute" />
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -91,13 +93,10 @@
         </VBox>
     </top>
     <center>
-        <Pane onKeyReleased="#zoomOut" onMouseDragged="#mouseDrag" onScroll="#scrollMouse" prefHeight="450.0" prefWidth="343.0" scaleY="0.99" BorderPane.alignment="CENTER">
-            <children>
-                <MazeDisplayer fx:id="mazeDisplayer" height="400.0" imageFileNamePlayer="./Resources/Images/ash.png" imageFileNameWall="./Resources/Images/grass.jpg" imageFinishPoint="./resources/Images/lugia.png" imageSolvePath="./resources/Images/solvePath.gif" onKeyPressed="#keyPress" width="400.0" />
-            </children>
-            <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-            </padding>
-        </Pane>
+        <ScrollPane fx:id="mainScrollPane" style="-fx-background: #90EE90"  onKeyReleased="#zoomOut"  onScroll="#scrollMouse" prefHeight="450.0" prefWidth="343.0" scaleY="0.99" BorderPane.alignment="CENTER">
+            <content>
+                <MazeDisplayer fx:id="mazeDisplayer" height="400.0" onMouseDragged="#mouseDrag" imageFileNamePlayer="./Resources/Images/ash.png" imageFileNameWall="./Resources/Images/grass.jpg" imageFinishPoint="./resources/Images/lugia.png" imageSolvePath="./resources/Images/solvePath.gif" onKeyPressed="#keyPress" width="400.0" />
+            </content>
+        </ScrollPane>
     </center>
 </BorderPane>

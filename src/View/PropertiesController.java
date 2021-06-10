@@ -35,16 +35,16 @@ public class PropertiesController extends AView implements IView, Observer {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<String> choiceForGenerate = FXCollections.observableArrayList("My maze generator","Empty maze generation","Simple maze generator");
+        ObservableList<String> choiceForGenerate = FXCollections.observableArrayList("MyMazeGenerator","EmptyMazeGenerator","SimpleMazeGenerator");
         generateMaze.setItems(choiceForGenerate);
-        ObservableList<String> choiceForSolve = FXCollections.observableArrayList("Best first search","Breadth first search","Depth first search");
+        ObservableList<String> choiceForSolve = FXCollections.observableArrayList("BestFirstSearch","BreadthFirstSearch","DepthFirstSearch");
         solveMaze.setItems(choiceForSolve);
 
 
 
     }
 
-    public void setProperties(ActionEvent actionEvent) throws IOException {
+    public void setProperties(ActionEvent actionEvent) throws IOException, InterruptedException {
         String num = numOfThreads.getText();
         if((!(isNumeric(num))) || Integer.valueOf(num) < 1) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -52,8 +52,8 @@ public class PropertiesController extends AView implements IView, Observer {
             alert.show();
             return;
         }
-        Configurations.getInstance().updateConfig(num,(String)generateMaze.getSelectionModel().getSelectedItem(),(String)solveMaze.getSelectionModel().getSelectedItem());
-        viewModel.update(null,"properties changed");
+
+        viewModel.setProperties(num,(String)generateMaze.getSelectionModel().getSelectedItem(),(String)solveMaze.getSelectionModel().getSelectedItem());
         Stage stage = (Stage) setProperties.getScene().getWindow();
         stage.close();
     }

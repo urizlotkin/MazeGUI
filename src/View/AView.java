@@ -15,7 +15,7 @@ public abstract class AView implements IView {
     protected void switchSence(String fxmlName) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlName));
         Parent root = fxmlLoader.load();
-        Main.getPrimaryStage().setScene(new Scene(root, 1000, 700));
+        Main.getPrimaryStage().setScene(new Scene(root, Main.getPrimaryStage().getWidth(), Main.getPrimaryStage().getHeight()));
         Main.getPrimaryStage().show();
         AView newView = fxmlLoader.getController();
         newView.setViewModel(Main.getViewModel());

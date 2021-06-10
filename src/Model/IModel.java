@@ -21,11 +21,11 @@ public interface IModel {
     void solveMaze() throws UnknownHostException;
     Solution getSolution();
     void setMaze(Maze maze);
-    void stopServers();
     void setPlayerRow(int playerRow);
     void setPlayerCol(int playerCol);
     void saveMaze(String name) throws IOException;
 
     void mouseDrag(MouseEvent mouseEvent, MazeDisplayer mazeDisplayer);
 
+    void setProperties(String num, String mazeAlgo, String solveAlgo) throws IOException, InterruptedException;
 }
