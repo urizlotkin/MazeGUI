@@ -196,7 +196,7 @@ public class MazeDisplayer extends Canvas {
         }
         else
         {
-            if(getWidth()>5500 || getHeight()>5500)
+            if(getWidth()>10000 || getHeight()>10000)
             {
                 return;
             }

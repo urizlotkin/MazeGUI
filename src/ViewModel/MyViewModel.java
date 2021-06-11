@@ -96,4 +96,8 @@ public class MyViewModel extends Observable implements Observer {
     public void setProperties(String num, String mazeAlgo, String solveAlgo) throws IOException, InterruptedException {
         model.setProperties(num,mazeAlgo,solveAlgo);
     }
+
+    public void stopServers() throws InterruptedException {
+        model.stopServers();
+    }
 }

@@ -1,61 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.SaveContrroller">
+<Pane fx:id="mainPane" stylesheets="@Properties.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.SaveContrroller">
    <children>
-      <BorderPane layoutY="-4.0" prefHeight="411.0" prefWidth="600.0">
-         <top>
-            <MenuBar BorderPane.alignment="CENTER">
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#newMaze" text="New" />
-                        <MenuItem disable="true" mnemonicParsing="false" text="Save" visible="false" />
-                        <MenuItem disable="true" mnemonicParsing="false" text="Load" visible="false" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Options">
-                  <items>
-                    <MenuItem disable="true" mnemonicParsing="false" text="Properties" visible="false" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Info">
-                  <items>
-                    <MenuItem disable="true" mnemonicParsing="false" text="About" visible="false" />
-                        <MenuItem mnemonicParsing="false" text="Help" />
-                  </items>
-                </Menu>
-                  <Menu mnemonicParsing="false" text="Exit" />
-              </menus>
-            </MenuBar>
-         </top>
-         <bottom>
-            <GridPane BorderPane.alignment="CENTER">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.20001220703125" minWidth="10.0" prefWidth="107.20001220703125" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="492.79998779296875" minWidth="10.0" prefWidth="492.79998779296875" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <TextField fx:id="mazeName" prefHeight="26.0" prefWidth="402.0" GridPane.columnIndex="1" />
-                  <Button mnemonicParsing="false" onAction="#saveMaze" prefHeight="26.0" prefWidth="88.0" text="Save" />
-               </children>
-            </GridPane>
-         </bottom>
-      </BorderPane>
+      <VBox layoutX="400.0" layoutY="304.0" prefHeight="24.0" prefWidth="86.0">
+         <children>
+            <Button onAction="#backToMain" mnemonicParsing="false" prefHeight="26.0" prefWidth="87.0" text="Back" />
+         </children>
+      </VBox>
+      <VBox layoutX="400.0" layoutY="258.0" prefHeight="24.0" prefWidth="86.0">
+         <children>
+            <Button onAction="#saveMaze" mnemonicParsing="false" prefHeight="26.0" prefWidth="87.0" text="Save" />
+         </children>
+      </VBox>
+      <VBox layoutX="492.0" layoutY="258.0" prefHeight="26.0" prefWidth="161.0">
+         <children>
+            <TextField fx:id="mazeName" />
+         </children>
+      </VBox>
    </children>
-</AnchorPane>
+</Pane>

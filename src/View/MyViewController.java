@@ -2,6 +2,7 @@ package View;
 import Model.MyModel;
 import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.Maze;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
@@ -176,6 +177,9 @@ public class MyViewController extends AView implements  IView , Observer {
             case "finish maze" -> {
                 finishMaze();
             }
+            case "exit" -> {
+                exitProgram();
+            }
             case "maze saved" -> {
                 viewModel.setMaze(null);
                 try {
@@ -188,6 +192,11 @@ public class MyViewController extends AView implements  IView , Observer {
         }
     }
 
+    private void exitProgram() {
+        Platform.exit();
+        System.exit(0);
+    }
+
     private void finishMaze() {
         Main.getMedia().setMute(true);
         Media song = new Media(new File("./resources/music/we are cut.mp3").toURI().toString());
@@ -198,6 +207,9 @@ public class MyViewController extends AView implements  IView , Observer {
         Main.getMedia().setMute(false);
         isSolved = true;
         solveMaze.setDisable(true);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("Congratulation!!! you found Lugia. \n For new maze press on Generate Maze");
+        alert.show();
 
     }
 
@@ -294,22 +306,18 @@ public class MyViewController extends AView implements  IView , Observer {
     }
 
     public void openProperties(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Properties.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage proStage = new Stage();
-        proStage.setScene(new Scene(root, 200, 200));
-        proStage.show();
+        switchSence("Properties.fxml");
     }
 
-    public void exit(ActionEvent actionEvent) {
-            System.exit(0);
+    public void exit(ActionEvent actionEvent) throws InterruptedException {
+        viewModel.stopServers();
     }
 
     public void about(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("About.fxml"));
         Parent root = fxmlLoader.load();
         Stage proStage = new Stage();
-        proStage.setScene(new Scene(root, 200, 200));
+        proStage.setScene(new Scene(root, 1000, 700));
         proStage.show();
     }
 
@@ -317,7 +325,7 @@ public class MyViewController extends AView implements  IView , Observer {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Help.fxml"));
         Parent root = fxmlLoader.load();
         Stage proStage = new Stage();
-        proStage.setScene(new Scene(root, 200, 200));
+        proStage.setScene(new Scene(root, 1200, 700));
         proStage.show();
     }
 

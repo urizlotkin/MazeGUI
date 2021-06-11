@@ -6,16 +6,9 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.HelpController">
+<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.HelpController">
    <children>
       <Pane layoutX="-2.0" layoutY="-3.0" prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <VBox layoutX="251.0" layoutY="301.0" prefHeight="42.0" prefWidth="109.0">
-               <children>
-                  <Button fx:id="close" onAction="#close" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" text="Close" />
-               </children>
-            </VBox>
-         </children>
       </Pane>
    </children>
 </AnchorPane>

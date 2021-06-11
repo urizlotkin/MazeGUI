@@ -37,6 +37,7 @@ public class Main extends Application {
         media.setAutoPlay(true);
         media.setCycleCount(MediaPlayer.INDEFINITE);
         media.play();
+
     }
     public static Stage getPrimaryStage(){
         return  mainStage;
@@ -48,5 +49,8 @@ public class Main extends Application {
     public static void setMedia(MediaPlayer media) { Main.media = media;}
     public static void main(String[] args) {
         launch(args);
+    }
+    public void stop() throws InterruptedException {
+        viewModel.stopServers();
     }
 }

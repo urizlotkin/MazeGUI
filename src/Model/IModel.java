@@ -28,4 +28,6 @@ public interface IModel {
     void mouseDrag(MouseEvent mouseEvent, MazeDisplayer mazeDisplayer);
 
     void setProperties(String num, String mazeAlgo, String solveAlgo) throws IOException, InterruptedException;
+
+    void stopServers() throws InterruptedException;
 }

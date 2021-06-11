@@ -10,6 +10,7 @@ import algorithms.mazeGenerators.MyMazeGenerator;
 import algorithms.search.AState;
 import algorithms.search.Solution;
 import Client.IClientStrategy;
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import java.io.*;
 import java.net.InetAddress;
@@ -160,7 +161,7 @@ public class MyModel extends Observable implements IModel {
     }
 
     public boolean canMove(int row, int col) {
-        if (row < 0 || col < 0 || row > maze.getRows() - 1 || col > maze.getColumns())
+        if (row < 0 || col < 0 || row > maze.getRows() - 1 || col > maze.getColumns() - 1)
             return false;
         if (maze.getMaze()[row][col] == 0)
             return true;
@@ -196,13 +197,29 @@ public class MyModel extends Observable implements IModel {
     }
 
     public void saveMaze(String name) throws IOException {
-        FileOutputStream fileMaze = new FileOutputStream("./resources" + "/savedMazes/" + name);
-        ObjectOutputStream createMazeFile = new ObjectOutputStream(fileMaze);
-        createMazeFile.writeObject(getMaze());
-        createMazeFile.flush();
-        createMazeFile.close();
-        setChanged();
-        notifyObservers("maze saved");
+        File dir = new File("./resources/savedMazes");
+        File[] fileListing = dir.listFiles();
+        for (int i = 0; i < fileListing.length; i++) {
+            if (fileListing[i].getName().equals(name)){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("this name already exist");
+                alert.show();
+                return;
+            }
+            else{
+                if( i == fileListing.length-1){
+                    FileOutputStream fileMaze = new FileOutputStream("./resources" + "/savedMazes/" + name);
+                    ObjectOutputStream createMazeFile = new ObjectOutputStream(fileMaze);
+                    createMazeFile.writeObject(getMaze());
+                    createMazeFile.flush();
+                    createMazeFile.close();
+                    setChanged();
+                    notifyObservers("maze saved");
+                    break;
+                }
+            }
+
+        }
     }
 
     @Override
@@ -218,7 +235,7 @@ public class MyModel extends Observable implements IModel {
             if (canMove(playerRow + 1, playerCol))
                 movePlayer(playerRow + 1, playerCol);
         }
-        if (playerRow  > mouseRow / cellHeight && mouseRow / cellHeight + 2 >= playerRow && playerCol + 1 >= mouseCol / cellWidth && playerCol <= mouseCol / cellWidth) {// up
+        if (playerRow  > mouseRow / cellHeight && mouseRow / cellHeight + 1 >= playerRow && playerCol + 1 >= mouseCol / cellWidth && playerCol <= mouseCol / cellWidth) {// up
             if (canMove(playerRow - 1, playerCol))
                 movePlayer(playerRow - 1, playerCol);
         }
@@ -249,7 +266,7 @@ public class MyModel extends Observable implements IModel {
     public void setProperties(String num, String mazeAlgo, String solveAlgo) throws IOException, InterruptedException {
         generateMaze.stop();
         solveSearchProblem.stop();
-/*        OutputStream file = new FileOutputStream(new File("resources/config.properties"));
+        OutputStream file = new FileOutputStream(new File("resources/config.properties"));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(file));
         bw.flush();
         bw.write("threadPoolSize="+num.toString());
@@ -258,15 +275,23 @@ public class MyModel extends Observable implements IModel {
         bw.newLine();
         bw.write("mazeSearchingAlgorithm="+solveAlgo.replaceAll("\\s+",""));
         bw.flush();
-        bw.close();*/
+        bw.close();
         Configurations.getInstance().updateConfig(num, mazeAlgo, solveAlgo);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         this.generateMaze = new Server(5400 , 1000, new ServerStrategyGenerateMaze());
         this.solveSearchProblem = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
         this.generateMaze.start();
         this.solveSearchProblem.start();
         setChanged();
         notifyObservers("properties changed");
+    }
+
+    public void stopServers() throws InterruptedException {
+        this.generateMaze.stop();
+        this.solveSearchProblem.stop();
+        Thread.sleep(1000);
+        setChanged();
+        notifyObservers("exit");
     }
 }
 

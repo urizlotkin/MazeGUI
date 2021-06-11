@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 
 import java.io.*;
@@ -15,7 +17,9 @@ import java.util.Observer;
 import java.util.ResourceBundle;
 
 public class SaveContrroller extends AView implements IView, Observer {
-    public Button save;
+
+
+    public Pane mainPane;
     public TextField mazeName;
 
     @Override
@@ -26,8 +30,17 @@ public class SaveContrroller extends AView implements IView, Observer {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setViewModel(Main.getViewModel());
+        Image image = null;
+        try {
+            image = new Image(new FileInputStream("resources/Images/save.jpeg"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true);
+        Background back = new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size));
+        mainPane.setBackground(back);
     }
-
+    
     @Override
     public void setViewModel(MyViewModel viewModel) {
             this.viewModel = viewModel;
@@ -40,10 +53,8 @@ public class SaveContrroller extends AView implements IView, Observer {
         viewModel.saveMaze(name);
     }
 
-    public void newMaze(ActionEvent actionEvent) throws IOException {
+    public void backToMain(ActionEvent actionEvent) throws IOException {
         viewModel.setMaze(null);
         switchSence("MyView.fxml");
-
     }
-
 }
