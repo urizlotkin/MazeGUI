@@ -196,7 +196,7 @@ public class MazeDisplayer extends Canvas {
         }
         else
         {
-            if(getWidth()>10000 || getHeight()>10000)
+            if(getWidth()>3600 || getHeight()>3600)
             {
                 return;
             }
@@ -221,6 +221,15 @@ public class MazeDisplayer extends Canvas {
             this.setLayoutX(mouseX-x);
             this.setLayoutY(mouseY - y);
         }
+    }
+
+    public void changePlayer(String s) throws FileNotFoundException {
+        if(s.equals("Ash Ketchum"))
+            setImageFileNamePlayer("./resources/Images/ash.png");
+        else{
+            setImageFileNamePlayer("./resources/Images/mistty.jpg");
+        }
+        draw((int)Main.getPrimaryStage().getHeight()-100,(int)Main.getPrimaryStage().getWidth()-150);
     }
 }
 

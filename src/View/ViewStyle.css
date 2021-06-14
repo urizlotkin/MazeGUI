@@ -1,6 +1,7 @@
 .root {
-    -fx-background-color: bisque;
+    -fx-background-color: #5c5fc7;
 }
+
 
 Button {
     -fx-text-fill: white;
@@ -18,4 +19,8 @@ Button:hover {
     -fx-text-fill: -fx-text-base-color;
     -fx-alignment: CENTER;
     -fx-content-display: LEFT;
+}
+
+Label{
+    -fx-font-weight: bold;
 }

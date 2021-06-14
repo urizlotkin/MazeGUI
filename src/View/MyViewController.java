@@ -5,17 +5,20 @@ import algorithms.mazeGenerators.Maze;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.transform.Scale;
@@ -41,8 +44,11 @@ public class MyViewController extends AView implements  IView , Observer {
     public BorderPane pane;
     public MenuItem close;
     public MenuItem about;
-    public ToggleButton muteButton;
+    //public ToggleButton muteButton;
     public ScrollPane mainScrollPane;
+    public CheckBox muteButton2;
+    public ChoiceBox charecter;
+    public Pane charectorPane;
     private boolean isSolved = false;
     private boolean isShowSolution =false;
     private boolean zoom= false;
@@ -77,6 +83,7 @@ public class MyViewController extends AView implements  IView , Observer {
                 }
                 event.consume();
             }});
+
     }
 
     private void changeSize() throws FileNotFoundException {
@@ -204,7 +211,9 @@ public class MyViewController extends AView implements  IView , Observer {
         Main.getMedia().setAutoPlay(true);
         Main.getMedia().setCycleCount(MediaPlayer.INDEFINITE);
         Main.getMedia().play();
-        Main.getMedia().setMute(false);
+        Main.getMedia().setMute(true);
+        if(!(muteButton2.isSelected()))
+            Main.getMedia().setMute(false);
         isSolved = true;
         solveMaze.setDisable(true);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -248,6 +257,8 @@ public class MyViewController extends AView implements  IView , Observer {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         playerRow.textProperty().bind(updatePlayerRow);
         playerCol.textProperty().bind(updatePlayerCol);
+        ObservableList<String> choiceForGenerate = FXCollections.observableArrayList("Ash Ketchum","Mistey");
+        charecter.setItems(choiceForGenerate);
     }
 
     public void saveMaze(ActionEvent actionEvent) throws IOException {
@@ -346,26 +357,37 @@ public class MyViewController extends AView implements  IView , Observer {
     }
 
     public void mute(ActionEvent actionEvent) {
-        if(muteButton.isSelected())
+        if(muteButton2.isSelected())
             Main.getMedia().setMute(true);
         else
             Main.getMedia().setMute(false);
     }
 
-    public void scrollMaze(ScrollEvent scrollEvent) {
-        double deltaY = scrollEvent.getDeltaY();
-        if (scrollEvent.isControlDown()) {
-            double zoomFactor = 1.05;
-            if (deltaY < 0) {
-                zoomFactor = 0.95;
+    public void changeCharector(ActionEvent actionEvent) throws FileNotFoundException {
+        if (charecter.getSelectionModel().getSelectedItem().equals("Ash Ketchum")) {
+            Image image = null;
+            try {
+                image = new Image(new FileInputStream("resources/Images/ash.png"));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             }
-            Scale newScale = new Scale();
-            newScale.setPivotX(scrollEvent.getX());
-            newScale.setPivotY(scrollEvent.getY());
-            newScale.setX(mazeDisplayer.getScaleX() * zoomFactor);
-            newScale.setY(mazeDisplayer.getScaleY() * zoomFactor);
-            mazeDisplayer.getTransforms().add(newScale);
-            mazeDisplayer.getTransforms().add(newScale);
+            BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true);
+            Background back = new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size));
+            charectorPane.setBackground(back);
+            mazeDisplayer.changePlayer("Ash Ketchum");
+        }
+        else{
+            Image image = null;
+            try {
+                image = new Image(new FileInputStream("./resources/Images/mistty.jpg"));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true);
+            Background back = new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size));
+            charectorPane.setBackground(back);
+            mazeDisplayer.changePlayer("Mistty");
         }
     }
+
 }

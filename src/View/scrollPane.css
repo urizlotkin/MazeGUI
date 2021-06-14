@@ -1,4 +1,5 @@
-.root {
-    -fx-background-color: bisque;
+.scroll-pane .viewport {
+    -fx-background-image: url("MazeBack.jpg");
+    -fx-background-size: cover;
 }
 
