@@ -32,6 +32,9 @@ public class MyModel extends Observable implements IModel {
     private int x;
     private final Logger LOG = LogManager.getLogger();
 
+    /**
+     * Constructor of MyModel class
+     */
     public MyModel() {
         this.generateMaze = new Server(5400, 1000, new ServerStrategyGenerateMaze());
         this.solveSearchProblem = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
@@ -42,6 +45,11 @@ public class MyModel extends Observable implements IModel {
     }
 
 
+    /** This function generate a maze by the server, according client's request
+     * @param row represents number of rows in maze
+     * @param col represents number of columns in maze
+     * @throws UnknownHostException
+     */
     @Override
     public void generateMaze(int row, int col) throws UnknownHostException {
         Client client = new Client(InetAddress.getByName("127.0.0.1"), 5400, new IClientStrategy() {
@@ -74,6 +82,9 @@ public class MyModel extends Observable implements IModel {
         notifyObservers("Maze generated");
     }
 
+    /** This function solve a maze by the server, according client's request
+     * @throws UnknownHostException
+     */
     public void solveMaze() throws UnknownHostException {
         Client client = new Client(InetAddress.getByName("127.0.0.1"), 5401, new IClientStrategy() {
             public void clientStrategy(InputStream inFromServer, OutputStream outToServer) {
@@ -104,11 +115,17 @@ public class MyModel extends Observable implements IModel {
     }
 
 
+    /**
+     * @return the maze
+     */
     @Override
     public Maze getMaze() {
         return maze;
     }
 
+    /** This function update the player's location according his steps
+     * @param direction represents the direction of the player
+     */
     @Override
     public void updatePlayerLocation(MovementDirection direction) {
         switch (direction) {
@@ -149,14 +166,24 @@ public class MyModel extends Observable implements IModel {
 
     }
 
+    /** This function set the row number position of the player
+     * @param playerRow represents the row number that the player is on
+     */
     public void setPlayerRow(int playerRow) {
         this.playerRow = playerRow;
     }
 
+    /** This function set the column number position of the player
+     * @param playerCol represents the column number that the player is on
+     */
     public void setPlayerCol(int playerCol) {
         this.playerCol = playerCol;
     }
 
+    /** This function move the player to specific position
+     * @param row represents the row number to which we want to move the player
+     * @param col represents the column number to which we want to move the player
+     */
     private void movePlayer(int row, int col) {
         this.playerRow = row;
         this.playerCol = col;
@@ -169,6 +196,11 @@ public class MyModel extends Observable implements IModel {
 
     }
 
+    /** This function checks if the player can move in given a specific location
+     * @param row represents the row number
+     * @param col represents the column number
+     * @return True if there is no wall, else return False
+     */
     public boolean canMove(int row, int col) {
         if (row < 0 || col < 0 || row > maze.getRows() - 1 || col > maze.getColumns() - 1)
             return false;
@@ -179,15 +211,22 @@ public class MyModel extends Observable implements IModel {
     }
 
 
+    /** This function return the row number that the player is on
+     * @return the row number that the player is on
+     */
     @Override
     public int getPlayerRow() {
         return playerRow;
     }
 
+    /** This function return the column number that the player is on
+     * @return the column number that the player is on
+     */
     @Override
     public int getPlayerCol() {
         return playerCol;
     }
+
 
     @Override
     public void assignObserver(Observer o) {
@@ -195,16 +234,26 @@ public class MyModel extends Observable implements IModel {
     }
 
 
+    /**
+     * @return solution of a specific mane
+     */
     @Override
     public Solution getSolution() {
         return solution;
     }
 
 
+    /** This function set a new maze to the param maze
+     * @param maze represent a new maze
+     */
     public void setMaze(Maze maze) {
         this.maze = maze;
     }
 
+    /** This function save a maze as a file
+     * @param name represents the name of the maze that the user wants to save
+     * @throws IOException
+     */
     public void saveMaze(String name) throws IOException {
         File dir = new File("./resources/savedMazes");
         File[] fileListing = dir.listFiles();
@@ -231,6 +280,10 @@ public class MyModel extends Observable implements IModel {
         }
     }
 
+    /** With this function you can move the player by drag the mouse
+     * @param mouseEvent represents the mouse
+     * @param mazeDisplayer represents the maze in our application
+     */
     @Override
     public void mouseDrag(MouseEvent mouseEvent, MazeDisplayer mazeDisplayer) {
         if (mazeDisplayer == null || (playerRow == maze.getGoalPosition().getRowIndex() && playerCol == maze.getGoalPosition().getColumnIndex()))
@@ -259,6 +312,10 @@ public class MyModel extends Observable implements IModel {
     }
 
 
+    /** This function calculates cell size
+     * @param mazeDisplayer represents the maze in our application
+     * @return cell height and cell width
+     */
     private double[] getCellSize(MazeDisplayer mazeDisplayer) {
         double canvasHeight = mazeDisplayer.getHeight();
         double canvasWidth = mazeDisplayer.getWidth();
@@ -272,6 +329,13 @@ public class MyModel extends Observable implements IModel {
         return a;
     }
 
+    /** This function set to properties of the maze by user's request
+     * @param num represents the number of thread pool
+     * @param mazeAlgo represents the generate algorithm the user wants to use
+     * @param solveAlgo represent the solve algorithm the user wants to use
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void setProperties(String num, String mazeAlgo, String solveAlgo) throws IOException, InterruptedException {
         generateMaze.stop();
         solveSearchProblem.stop();
@@ -295,6 +359,9 @@ public class MyModel extends Observable implements IModel {
         notifyObservers("properties changed");
     }
 
+    /** This function stop the all servers
+     * @throws InterruptedException
+     */
     public void stopServers() throws InterruptedException {
         this.generateMaze.stop();
         this.solveSearchProblem.stop();
