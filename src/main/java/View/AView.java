@@ -1,7 +1,6 @@
 package View;
 
 import ViewModel.MyViewModel;
-import View.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,14 +10,14 @@ public abstract class AView implements IView {
 
     protected MyViewModel viewModel;
 
-    public AView(){this.viewModel = Main.getViewModel();}
+    public AView(){this.viewModel = View.Main.getViewModel();}
     protected void switchSence(String fxmlName) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlName));
         Parent root = fxmlLoader.load();
-        Main.getPrimaryStage().setScene(new Scene(root, Main.getPrimaryStage().getWidth(), Main.getPrimaryStage().getHeight()));
+        View.Main.getPrimaryStage().setScene(new Scene(root, Main.getPrimaryStage().getWidth(), Main.getPrimaryStage().getHeight()));
         Main.getPrimaryStage().show();
         AView newView = fxmlLoader.getController();
-        newView.setViewModel(Main.getViewModel());
+        newView.setViewModel(View.Main.getViewModel());
     }
 
     public static boolean isNumeric(String str) {

@@ -1,5 +1,4 @@
 package View;
-import View.Main;
 import Server.Configurations;
 import ViewModel.MyViewModel;
 import javafx.collections.FXCollections;
@@ -10,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

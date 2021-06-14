@@ -18,6 +18,8 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import Server.Configurations;
 
 public class MyModel extends Observable implements IModel {
@@ -27,12 +29,16 @@ public class MyModel extends Observable implements IModel {
     private Solution solution;
     private Server generateMaze;
     private Server solveSearchProblem;
+    private int x;
+    private final Logger LOG = LogManager.getLogger();
 
     public MyModel() {
         this.generateMaze = new Server(5400, 1000, new ServerStrategyGenerateMaze());
         this.solveSearchProblem = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
         this.generateMaze.start();
+        LOG.info("Generator maze server start to work with port "+ 5400);
         this.solveSearchProblem.start();
+        LOG.info("Solving maze server start to work with port "+ 5401);
     }
 
 
@@ -41,6 +47,7 @@ public class MyModel extends Observable implements IModel {
         Client client = new Client(InetAddress.getByName("127.0.0.1"), 5400, new IClientStrategy() {
             public void clientStrategy(InputStream inFromServer, OutputStream outToServer) {
                 try {
+                    LOG.info("client number: " +InetAddress.getLocalHost() +  "ask from server to generate new maze" );
                     ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
                     ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                     toServer.flush();
@@ -52,6 +59,8 @@ public class MyModel extends Observable implements IModel {
                     byte[] decompressedMaze = new byte[24 + mazeDimensions[0] * mazeDimensions[1]];
                     is.read(decompressedMaze);
                     maze = new Maze(decompressedMaze);
+                    LOG.info("Maze sizes: rows-"+maze.getRows()+"Maze sizes: colums-"+maze.getColumns());
+                    LOG.info("Generator maze server finish serve client");
                 } catch (Exception var10) {
                     var10.printStackTrace();
                 }

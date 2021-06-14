@@ -1,0 +1,43 @@
+2021.06.14 16:02:41.679 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.14 16:02:41.685 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.14 16:02:44.422 INFO  Model.MyModel - Client ask from server to generate new maze
+2021.06.14 16:02:44.430 INFO  Model.MyModel - [[I@420a7b1
+2021.06.14 16:02:44.430 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.14 16:02:46.144 INFO  Model.MyModel - Client ask from server to generate new maze
+2021.06.14 16:02:46.148 INFO  Model.MyModel - [[I@f24275b
+2021.06.14 16:02:46.148 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.14 16:13:10.788 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.14 16:13:10.792 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.14 16:20:52.231 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.14 16:20:52.235 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.14 16:22:08.287 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.14 16:22:08.291 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.14 16:22:21.538 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.14 16:22:21.546 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.14 16:22:21.547 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.14 16:22:37.704 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.14 16:22:37.710 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.14 16:23:17.083 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.14 16:23:17.088 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.14 16:24:56.755 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.14 16:24:56.759 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.14 16:26:10.620 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.14 16:26:10.625 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.14 16:26:17.527 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.14 16:26:17.538 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.14 16:26:17.538 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.14 16:27:27.908 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.14 16:27:27.912 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.14 16:27:40.284 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.14 16:27:40.291 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.14 16:27:40.291 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.14 16:29:42.896 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.14 16:29:42.900 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.14 16:29:45.287 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.14 16:29:45.293 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.14 16:29:45.293 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.14 16:30:14.814 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.14 16:30:14.821 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.14 16:30:17.038 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.14 16:30:17.044 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.14 16:30:17.044 INFO  Model.MyModel - Generator maze server finish serve client

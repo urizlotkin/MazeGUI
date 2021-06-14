@@ -12,7 +12,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.transform.Scale;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -64,7 +63,7 @@ public class MazeDisplayer extends Canvas {
     public void setPlayerPosition(int row, int col) throws FileNotFoundException {
         this.playerCol = col;
         this.playerRow = row;
-        draw((int)Main.getPrimaryStage().getHeight()-100,(int)Main.getPrimaryStage().getWidth()-150);
+        draw((int) Main.getPrimaryStage().getHeight()-100,(int) Main.getPrimaryStage().getWidth()-150);
     }
 
     public String getImageFileNameWall() {
@@ -87,7 +86,7 @@ public class MazeDisplayer extends Canvas {
         zoomHight = 0;
         zoomWidth = 0;
         isZoomNeededReset = true;
-        draw((int)Main.getPrimaryStage().getHeight()-100,(int)Main.getPrimaryStage().getWidth()-150);
+        draw((int) Main.getPrimaryStage().getHeight()-100,(int) Main.getPrimaryStage().getWidth()-150);
     }
 
     public void draw(double height, double width) throws FileNotFoundException {
@@ -172,13 +171,13 @@ public class MazeDisplayer extends Canvas {
 
     public void setSolution(Solution solution) throws FileNotFoundException {
         this.sol = solution;
-        draw((int)Main.getPrimaryStage().getHeight()-100,(int)Main.getPrimaryStage().getWidth()-150);
+        draw((int) Main.getPrimaryStage().getHeight()-100,(int) Main.getPrimaryStage().getWidth()-150);
     }
 
 
     public void clearSolution() throws FileNotFoundException {
         isShowSol=true;
-        draw((int)Main.getPrimaryStage().getHeight()-100,(int)Main.getPrimaryStage().getWidth()-150);
+        draw((int) Main.getPrimaryStage().getHeight()-100,(int) Main.getPrimaryStage().getWidth()-150);
     }
 
     public void canDrawSolution() {
@@ -229,7 +228,7 @@ public class MazeDisplayer extends Canvas {
         else{
             setImageFileNamePlayer("./resources/Images/mistty.jpg");
         }
-        draw((int)Main.getPrimaryStage().getHeight()-100,(int)Main.getPrimaryStage().getWidth()-150);
+        draw((int) Main.getPrimaryStage().getHeight()-100,(int) Main.getPrimaryStage().getWidth()-150);
     }
 }
 

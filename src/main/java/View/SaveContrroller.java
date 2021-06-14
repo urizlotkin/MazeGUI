@@ -1,14 +1,10 @@
 package View;
 
 import ViewModel.MyViewModel;
-import algorithms.mazeGenerators.Maze;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.stage.FileChooser;
 
 import java.io.*;
 import java.net.URL;
@@ -48,7 +44,7 @@ public class SaveContrroller extends AView implements IView, Observer {
     }
 
     public void saveMaze(ActionEvent actionEvent) throws IOException {
-      // setViewModel(Main.getViewModel());
+      // setViewModel(View.Main.getViewModel());
         String name = mazeName.getText();
         viewModel.saveMaze(name);
     }

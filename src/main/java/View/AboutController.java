@@ -1,11 +1,8 @@
 package View;
 
 import ViewModel.MyViewModel;
-import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

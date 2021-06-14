@@ -1,5 +1,4 @@
 package View;
-import Model.MyModel;
 import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.Maze;
 import javafx.application.Platform;
@@ -21,7 +20,6 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.transform.Scale;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.*;
@@ -88,7 +86,7 @@ public class MyViewController extends AView implements  IView , Observer {
 
     private void changeSize() throws FileNotFoundException {
         mazeDisplayer.setZoomNeededReset(true);
-        mazeDisplayer.draw((int)Main.getPrimaryStage().getHeight()-100,(int)Main.getPrimaryStage().getWidth()-150);
+        mazeDisplayer.draw((int) Main.getPrimaryStage().getHeight()-100,(int) Main.getPrimaryStage().getWidth()-150);
     }
 
 
@@ -179,7 +177,8 @@ public class MyViewController extends AView implements  IView , Observer {
             }
             case "properties changed" -> {
                     //viewModel.stopServers();
-                    //viewModel = new MyViewModel(new MyModel());
+                    //viewModel = new MyView
+                // Model(new MyModel());
             }
             case "finish maze" -> {
                 finishMaze();
@@ -227,10 +226,13 @@ public class MyViewController extends AView implements  IView , Observer {
             mazeDisplayer.canDrawSolution();
             mazeDisplayer.setSolution(viewModel.getSolution());
             isShowSolution = true;
+            solveMaze.setText("Unsolved");
+
         }
         else {
             mazeDisplayer.clearSolution();
             isShowSolution = false;
+            solveMaze.setText("Solve Maze");
         }
     }
 
