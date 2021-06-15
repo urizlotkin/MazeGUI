@@ -45,8 +45,8 @@ public class MyViewController extends AView implements  IView , Observer {
     //public ToggleButton muteButton;
     public ScrollPane mainScrollPane;
     public CheckBox muteButton2;
-    public ChoiceBox charecter;
-    public Pane charectorPane;
+    public ChoiceBox character;
+    public Pane characterPane;
     private boolean isSolved = false;
     private boolean isShowSolution =false;
     private boolean zoom= false;
@@ -115,6 +115,8 @@ public class MyViewController extends AView implements  IView , Observer {
                 //this.mazeDisplayer.scaleXProperty().bind(pane.widthProperty());
                 //this.mazeDisplayer.scaleYProperty().bind(pane.heightProperty());
             }
+            if((muteButton2.isSelected()))
+                Main.getMedia().setMute(true);
         }
     }
 
@@ -260,7 +262,7 @@ public class MyViewController extends AView implements  IView , Observer {
         playerRow.textProperty().bind(updatePlayerRow);
         playerCol.textProperty().bind(updatePlayerCol);
         ObservableList<String> choiceForGenerate = FXCollections.observableArrayList("Ash Ketchum","Mistey");
-        charecter.setItems(choiceForGenerate);
+        character.setItems(choiceForGenerate);
     }
 
     public void saveMaze(ActionEvent actionEvent) throws IOException {
@@ -365,8 +367,8 @@ public class MyViewController extends AView implements  IView , Observer {
             Main.getMedia().setMute(false);
     }
 
-    public void changeCharector(ActionEvent actionEvent) throws FileNotFoundException {
-        if (charecter.getSelectionModel().getSelectedItem().equals("Ash Ketchum")) {
+    public void changeCharacter(ActionEvent actionEvent) throws FileNotFoundException {
+        if (character.getSelectionModel().getSelectedItem().equals("Ash Ketchum")) {
             Image image = null;
             try {
                 image = new Image(new FileInputStream("resources/Images/ash.png"));
@@ -375,7 +377,7 @@ public class MyViewController extends AView implements  IView , Observer {
             }
             BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true);
             Background back = new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size));
-            charectorPane.setBackground(back);
+            characterPane.setBackground(back);
             mazeDisplayer.changePlayer("Ash Ketchum");
         }
         else{
@@ -387,7 +389,7 @@ public class MyViewController extends AView implements  IView , Observer {
             }
             BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true);
             Background back = new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size));
-            charectorPane.setBackground(back);
+            characterPane.setBackground(back);
             mazeDisplayer.changePlayer("Mistty");
         }
     }
