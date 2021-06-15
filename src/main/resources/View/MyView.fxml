@@ -48,9 +48,9 @@
                     <Label fx:id="playerCol" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 </GridPane>
             <CheckBox fx:id="muteButton2" mnemonicParsing="false" onAction="#mute" text="Music on/off" />
-            <ChoiceBox fx:id="charecter" prefWidth="150.0" onAction="#changeCharector" />
+            <ChoiceBox fx:id="character" prefWidth="150.0" onAction="#changeCharacter" />
             <VBox prefHeight="68.0" prefWidth="164.0" />
-            <Pane fx:id="charectorPane" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="characterPane" prefHeight="200.0" prefWidth="200.0" />
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
