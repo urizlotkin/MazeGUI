@@ -10,7 +10,19 @@ public abstract class AView implements IView {
 
     protected MyViewModel viewModel;
 
+
+    /**
+     * abstract class that represent some view controller
+     * in the constractur the new view controller set main viewModel
+     * as a field.
+     */
     public AView(){this.viewModel = View.Main.getViewModel();}
+
+
+    /** This function switch between sences.
+     * @param fxmlName fxml name that we want to switch to.
+     * @throws IOException
+     */
     protected void switchSence(String fxmlName) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlName));
         Parent root = fxmlLoader.load();
@@ -20,6 +32,11 @@ public abstract class AView implements IView {
         newView.setViewModel(View.Main.getViewModel());
     }
 
+    /** check if string is numric.
+     * @param str string we want to check
+     * @return true if the string numric
+     *         false if not numric.
+     */
     public static boolean isNumeric(String str) {
         try {
             Double.parseDouble(str);

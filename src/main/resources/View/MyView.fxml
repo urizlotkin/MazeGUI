@@ -100,7 +100,7 @@
     <center>
         <ScrollPane fx:id="mainScrollPane" onKeyReleased="#zoomOut" onScroll="#scrollMouse" prefHeight="450.0" prefWidth="343.0" scaleY="0.99" stylesheets="@scrollPane.css" BorderPane.alignment="CENTER">
             <content>
-                <MazeDisplayer fx:id="mazeDisplayer" width="400.0" height="400.0" imageFileNamePlayer="./Resources/Images/ash.png" imageFileNameWall="./Resources/Images/grass.jpg" imageFinishPoint="./resources/Images/lugia.png" imageSolvePath="./resources/Images/solvePath.gif" onKeyPressed="#keyPress" onMouseDragged="#mouseDrag"  />
+                <MazeDisplayer fx:id="mazeDisplayer" width="400.0" height="400.0" imageFileNamePlayer="./resources/Images/ash.png" imageFileNameWall="./resources/Images/grass.jpg" imageFinishPoint="./resources/Images/lugia.png" imageSolvePath="./resources/Images/solvePath.gif" onKeyPressed="#keyPress" onMouseDragged="#mouseDrag"  />
             </content>
         </ScrollPane>
     </center>

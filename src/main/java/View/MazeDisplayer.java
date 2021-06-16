@@ -20,19 +20,6 @@ public class MazeDisplayer extends Canvas {
     StringProperty imageFileNameWall = new SimpleStringProperty();
     StringProperty imageFileNamePlayer = new SimpleStringProperty();
     StringProperty imageFinishPoint = new SimpleStringProperty();
-
-    public void setImageSolvePath(String imageSolvePath) {
-        this.imageSolvePath.set(imageSolvePath);
-    }
-
-    public String getImageSolvePath() {
-        return imageSolvePath.get();
-    }
-
-    public StringProperty imageSolvePathProperty() {
-        return imageSolvePath;
-    }
-
     StringProperty imageSolvePath = new SimpleStringProperty();
     private int[][] maze;
     private int playerRow=0;
@@ -43,43 +30,56 @@ public class MazeDisplayer extends Canvas {
     private double zoomHight = 0;
     private double zoomWidth = 0;
 
-    public void setImageFinishPoint(String imageFinishPoint) {
-        this.imageFinishPoint.set(imageFinishPoint);
+    public String getImageSolvePath() {
+        return imageSolvePath.get();
     }
     public String getImageFinishPoint() {
         return imageFinishPoint.get();
     }
-    public StringProperty imageFinishPointProperty() {
-        return imageFinishPoint;
+    public String getImageFileNameWall() {
+        return imageFileNameWall.get();
     }
+    public void setImageFileNameWall(String imageFileNameWall) { this.imageFileNameWall.set(imageFileNameWall); }
+    public void setImageFinishPoint(String imageFinishPoint) { this.imageFinishPoint.set(imageFinishPoint); }
+    public void setImageSolvePath(String imageSolvePath) { this.imageSolvePath.set(imageSolvePath); }
+    public String getImageFileNamePlayer() {
+        return imageFileNamePlayer.get();
+    }
+    public void setImageFileNamePlayer(String imageFileNamePlayer) { this.imageFileNamePlayer.set(imageFileNamePlayer); }
     public int getPlayerRow() {
         return playerRow;
     }
     public int getPlayerCol() {
         return playerCol;
     }
+
+    /**
+     * constructor of Canvas.javafx.
+     */
+    public MazeDisplayer(){
+        super();
+    }
+    /** set boolean that check if mazeDisplayer need reset for the zoom, like when the player want to generate new maze.
+     * @param zoomNeededReset true/false depence on the situation.
+     */
     public void setZoomNeededReset(boolean zoomNeededReset) { isZoomNeededReset = zoomNeededReset; }
 
+    /** set new position for the player in the maze.
+     * @param row new player row.
+     * @param col new player column.
+     * @throws FileNotFoundException
+     */
     public void setPlayerPosition(int row, int col) throws FileNotFoundException {
         this.playerCol = col;
         this.playerRow = row;
         draw((int) Main.getPrimaryStage().getHeight()-100,(int) Main.getPrimaryStage().getWidth()-150);
     }
 
-    public String getImageFileNameWall() {
-        return imageFileNameWall.get();
-    }
-    public String getImageFileNamePlayer() {
-        return imageFileNamePlayer.get();
-    }
-    public void setImageFileNameWall(String imageFileNameWall) {
-        this.imageFileNameWall.set(imageFileNameWall);
-    }
-    public void setImageFileNamePlayer(String imageFileNamePlayer) { this.imageFileNamePlayer.set(imageFileNamePlayer); }
-    public MazeDisplayer(){
-        super();
-    }
 
+    /** draw new maze on the mazeDisplayer.
+     * @param maze new maze.
+     * @throws FileNotFoundException
+     */
     public void drawMaze(int[][] maze) throws FileNotFoundException {
         this.maze = maze;
         this.sol = null;
@@ -89,6 +89,11 @@ public class MazeDisplayer extends Canvas {
         draw((int) Main.getPrimaryStage().getHeight()-100,(int) Main.getPrimaryStage().getWidth()-150);
     }
 
+    /** draw maze when somthing change there, like every move of the player or resize the screen of the game.
+     * @param height the height that the mazeDisplayer will draw himself on the screen.
+     * @param width the width that the mazeDisplayer will draw himself on the screen.
+     * @throws FileNotFoundException
+     */
     public void draw(double height, double width) throws FileNotFoundException {
         if(maze != null){
             if(isZoomNeededReset) {
@@ -113,6 +118,12 @@ public class MazeDisplayer extends Canvas {
         }
     }
 
+    /** draw solution path on the mazeDisplayer.
+     * @param graphicsContext
+     * @param cellHeight the height size of each cell in the maze.
+     * @param cellWidth the width size of each cell in the maze.
+     * @throws FileNotFoundException
+     */
     private void drawSolution(GraphicsContext graphicsContext, double cellHeight, double cellWidth) throws FileNotFoundException {
         Image solvePath = new Image(new FileInputStream(getImageSolvePath()));
         for (int i = 0; i < sol.getSolutionPath().size()-1;i ++) {
@@ -121,12 +132,24 @@ public class MazeDisplayer extends Canvas {
         }
     }
 
+    /** draw the end point image.
+     * @param graphicsContext
+     * @param cellHeight the height size of each cell in the maze.
+     * @param cellWidth the width size of each cell in the maze.
+     * @throws FileNotFoundException
+     */
     private void drawEndPoint(GraphicsContext graphicsContext, double cellHeight, double cellWidth) throws FileNotFoundException {
-        //graphicsContext.setFill(Color.GREEN);
         Image finishPoint = new Image(new FileInputStream(getImageFinishPoint()));
         graphicsContext.drawImage(finishPoint, cellWidth* (maze[0].length-1), cellHeight*(maze.length-1), cellWidth, cellHeight);
     }
 
+    /** draw maze walls.
+     * @param graphicsContext
+     * @param cellHeight the height size of each cell in the maze.
+     * @param cellWidth the width size of each cell in the maze.
+     * @param rows the number of rows in the maze.
+     * @param cols the number of columns in the maze.
+     */
     private void drawMazeWalls(GraphicsContext graphicsContext, double cellHeight, double cellWidth, int rows, int cols) {
         graphicsContext.setFill(Color.RED);
 
@@ -152,6 +175,11 @@ public class MazeDisplayer extends Canvas {
         }
     }
 
+    /** draw the image of the player in the maze.
+     * @param graphicsContext
+     * @param cellHeight the height size of each cell in the maze.
+     * @param cellWidth the width size of each cell in the maze.
+     */
     private void drawPlayer(GraphicsContext graphicsContext, double cellHeight, double cellWidth) {
         double x = getPlayerCol() * cellWidth;
         double y = getPlayerRow() * cellHeight;
@@ -169,12 +197,19 @@ public class MazeDisplayer extends Canvas {
             graphicsContext.drawImage(playerImage, x, y, cellWidth, cellHeight);
     }
 
+    /** set new solution for the current maze.
+     * @param solution object that keep the solution information.
+     * @throws FileNotFoundException
+     */
     public void setSolution(Solution solution) throws FileNotFoundException {
         this.sol = solution;
         draw((int) Main.getPrimaryStage().getHeight()-100,(int) Main.getPrimaryStage().getWidth()-150);
     }
 
 
+    /** clear the mazeDisplayer form the solution path.
+     * @throws FileNotFoundException
+     */
     public void clearSolution() throws FileNotFoundException {
         isShowSol=true;
         draw((int) Main.getPrimaryStage().getHeight()-100,(int) Main.getPrimaryStage().getWidth()-150);
@@ -184,6 +219,10 @@ public class MazeDisplayer extends Canvas {
         isShowSol=false;
     }
 
+    /** handle zoom in and out on the mazeDisplayer.
+     * @param scrollEvent get scroll mouse delta.
+     * @throws FileNotFoundException
+     */
     public void zoomInOut(ScrollEvent scrollEvent) throws FileNotFoundException {
         if (scrollEvent.getDeltaY() < 0)
         {
@@ -212,16 +251,11 @@ public class MazeDisplayer extends Canvas {
 
     }
 
-    public void dragMaze(MouseEvent mouseEvent, Pane mainPane, double x, double y) {
-        double mouseX = mouseEvent.getX();
-        double mouseY = mouseEvent.getY();
-        Bounds boundsInScene = mainPane.localToScene(mainPane.getBoundsInLocal());
-        if(mouseX > boundsInScene.getMinX() - 175 && mouseY > boundsInScene.getMinY()-25) {
-            this.setLayoutX(mouseX-x);
-            this.setLayoutY(mouseY - y);
-        }
-    }
 
+    /** change the player in the maze.
+     * @param s string that represent witch player the gamer choose.
+     * @throws FileNotFoundException
+     */
     public void changePlayer(String s) throws FileNotFoundException {
         if(s.equals("Ash Ketchum"))
             setImageFileNamePlayer("./resources/Images/ash.png");

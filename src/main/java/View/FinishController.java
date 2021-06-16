@@ -11,7 +11,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-public class AboutController extends AView implements IView, Observer {
+public class FinishController extends AView implements IView, Observer {
     public AnchorPane mainPane;
 
     /** Set viewModel for this controller.
@@ -29,7 +29,7 @@ public class AboutController extends AView implements IView, Observer {
         // create a input stream
         Image image = null;
         try {
-            image = new Image(new FileInputStream("resources/Images/about.PNG"));
+            image = new Image(new FileInputStream("resources/Images/finish.PNG"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

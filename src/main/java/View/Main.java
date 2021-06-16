@@ -20,6 +20,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        Media song = new Media(new File("./resources/music/Lugia's Song.mp3").toURI().toString());
+        media = new MediaPlayer(song);
+        media.setAutoPlay(true);
+        media.setCycleCount(MediaPlayer.INDEFINITE);
+        media.play();
         this.mainStage = primaryStage;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();
@@ -30,11 +35,6 @@ public class Main extends Application {
         viewModel = new MyViewModel(model);
         MyViewController view = fxmlLoader.getController();
         view.setViewModel(viewModel);
-        Media song = new Media(new File("./resources/music/Lugia's Song.mp3").toURI().toString());
-        media = new MediaPlayer(song);
-        media.setAutoPlay(true);
-        media.setCycleCount(MediaPlayer.INDEFINITE);
-        media.play();
 
     }
     public static Stage getPrimaryStage(){

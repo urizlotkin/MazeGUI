@@ -42,7 +42,6 @@ public class MyViewController extends AView implements  IView , Observer {
     public BorderPane pane;
     public MenuItem close;
     public MenuItem about;
-    //public ToggleButton muteButton;
     public ScrollPane mainScrollPane;
     public CheckBox muteButton2;
     public ChoiceBox character;
@@ -50,9 +49,20 @@ public class MyViewController extends AView implements  IView , Observer {
     private boolean isSolved = false;
     private boolean isShowSolution =false;
     private boolean zoom= false;
+    private static int counter = 0;
     StringProperty updatePlayerRow = new SimpleStringProperty();
     StringProperty updatePlayerCol = new SimpleStringProperty();
 
+    private void setUpdatePlayerCol(int col) {
+        this.updatePlayerCol.set(col+"");
+    }
+    private void setUpdatePlayerRow(int row) {
+        this.updatePlayerRow.set(row+"");
+    }
+
+    /** Set viewModel for this controller.
+     * @param viewModel middle connection with model.
+     */
     public void setViewModel(MyViewModel viewModel) {
         this.viewModel = viewModel;
         this.viewModel.addObserver( this);
@@ -82,15 +92,24 @@ public class MyViewController extends AView implements  IView , Observer {
                 event.consume();
             }});
 
+
+
     }
 
+    /** function get called when the window size change, the function call function that will change the mazeDisplayer size.
+     * @throws FileNotFoundException
+     */
     private void changeSize() throws FileNotFoundException {
         mazeDisplayer.setZoomNeededReset(true);
         mazeDisplayer.draw((int) Main.getPrimaryStage().getHeight()-100,(int) Main.getPrimaryStage().getWidth()-150);
     }
 
 
-
+    /** the function called when player press on generate maze button, the function call viewModel to generate it.
+     * @param actionEvent press on generate maze button.
+     * @throws UnknownHostException
+     * @throws FileNotFoundException
+     */
     public void generateMaze(ActionEvent actionEvent) throws UnknownHostException, FileNotFoundException {
         String rowText = textField_mazeRows.getText();
         String columnText = textField_mazeColumns.getText();
@@ -120,9 +139,17 @@ public class MyViewController extends AView implements  IView , Observer {
         }
     }
 
+    /** solve the current maze
+     * @param actionEvent press on solve maze button.
+     * @throws UnknownHostException
+     */
     public void solveMaze(ActionEvent actionEvent) throws UnknownHostException {
         viewModel.solveMaze();
     }
+
+    /** check if the player press control on the keyborad  maybe he want to zoom in/out, else maybe want to move the player in the maze.
+     * @param keyEvent some key in the keyboard
+     */
     public void keyPress (KeyEvent keyEvent){
         if(keyEvent.getCode() == KeyCode.CONTROL) {
             zoom = true;
@@ -133,25 +160,28 @@ public class MyViewController extends AView implements  IView , Observer {
         }
     }
 
+    /** set new player position
+     * @param row current player row
+     * @param col current player column
+     * @throws FileNotFoundException
+     */
     public void setPlayerPosition(int row, int col) throws FileNotFoundException {
         mazeDisplayer.setPlayerPosition(row, col);
         setUpdatePlayerRow(row);
         setUpdatePlayerCol(col);
     }
 
-    private void setUpdatePlayerCol(int col) {
-        this.updatePlayerCol.set(col+"");
-    }
-
-    private void setUpdatePlayerRow(int row) {
-        this.updatePlayerRow.set(row+"");
-    }
-
-
+    /** make focus on the maze
+     * @param mouseEvent mouse click on mazeDisplayer
+     */
     public void mouseClick(MouseEvent mouseEvent) {
         mazeDisplayer.requestFocus();
     }
 
+    /** this controller get info from model throw view model and this function make the needed changes in the sence.
+     * @param o
+     * @param arg what happen.
+     */
     @Override
     public void update(Observable o, Object arg) {
         String change = (String) arg;
@@ -178,12 +208,17 @@ public class MyViewController extends AView implements  IView , Observer {
                 }
             }
             case "properties changed" -> {
-                    //viewModel.stopServers();
-                    //viewModel = new MyView
-                // Model(new MyModel());
+                if(Main.getMedia().isMute())
+                    muteButton2.setSelected(true);
             }
             case "finish maze" -> {
-                finishMaze();
+                try {
+                    if(counter == 0)
+                        finishMaze();
+                    counter++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             case "exit" -> {
                 exitProgram();
@@ -205,7 +240,10 @@ public class MyViewController extends AView implements  IView , Observer {
         System.exit(0);
     }
 
-    private void finishMaze() {
+    /**
+     * fnuction called when the player succeed to finish the maze.
+     */
+    private void finishMaze() throws IOException {
         Main.getMedia().setMute(true);
         Media song = new Media(new File("./resources/music/we are cut.mp3").toURI().toString());
         Main.setMedia(new MediaPlayer(song));
@@ -217,12 +255,16 @@ public class MyViewController extends AView implements  IView , Observer {
             Main.getMedia().setMute(false);
         isSolved = true;
         solveMaze.setDisable(true);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Congratulation!!! you found Lugia. \n For new maze press on Generate Maze");
-        alert.show();
-
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Finish.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage proStage = new Stage();
+        proStage.setScene(new Scene(root, 550, 400));
+        proStage.show();
     }
 
+    /** function called when player ask for show the solution of gthe current maze. this function show the solution on the screen.
+     * @throws FileNotFoundException
+     */
     private void mazeSolved() throws FileNotFoundException {
         if(isShowSolution == false) {
             mazeDisplayer.canDrawSolution();
@@ -238,12 +280,19 @@ public class MyViewController extends AView implements  IView , Observer {
         }
     }
 
+    /** show the player movements.
+     * @throws FileNotFoundException
+     */
     private void playerMoved() throws FileNotFoundException {
         setPlayerPosition(viewModel.getPlayerRow(), viewModel.getPlayerCol());
     }
 
+    /** this function called when the player want to generate new maze.
+     * @throws FileNotFoundException
+     */
     private void mazeGenerated() throws FileNotFoundException {
         mazeDisplayer.drawMaze(viewModel.getMaze().getMaze());
+        counter = 0;
         if(isSolved){
             Main.getMedia().setMute(true);
             Media song = new Media(new File("./resources/music/Lugia's Song.mp3").toURI().toString());
@@ -257,14 +306,24 @@ public class MyViewController extends AView implements  IView , Observer {
     }
 
 
+    /** function that called everytime there is some change in the scene.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         playerRow.textProperty().bind(updatePlayerRow);
         playerCol.textProperty().bind(updatePlayerCol);
         ObservableList<String> choiceForGenerate = FXCollections.observableArrayList("Ash Ketchum","Mistey");
         character.setItems(choiceForGenerate);
+        if(Main.getMedia().isMute())
+            muteButton2.setSelected(true);
     }
 
+    /** open new sence for saving the current maze.
+     * @param actionEvent player press on save maze.
+     * @throws IOException
+     */
     public void saveMaze(ActionEvent actionEvent) throws IOException {
         if(this.viewModel.getMaze() == null)
         {
@@ -280,6 +339,11 @@ public class MyViewController extends AView implements  IView , Observer {
         }
     }
 
+    /** load maze from the memory of your PC.
+     * @param actionEvent player press on load .
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void loadFile(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         FileChooser fc = new FileChooser();
         fc.setTitle("Load maze");
@@ -320,14 +384,26 @@ public class MyViewController extends AView implements  IView , Observer {
 
     }
 
+    /** open properties sence.
+     * @param actionEvent press on properties.
+     * @throws IOException
+     */
     public void openProperties(ActionEvent actionEvent) throws IOException {
         switchSence("Properties.fxml");
     }
 
+    /** safe exit
+     * @param actionEvent press on exit
+     * @throws InterruptedException
+     */
     public void exit(ActionEvent actionEvent) throws InterruptedException {
         viewModel.stopServers();
     }
 
+    /** change to about sence.
+     * @param actionEvent  press on about
+     * @throws IOException
+     */
     public void about(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("About.fxml"));
         Parent root = fxmlLoader.load();
@@ -336,6 +412,10 @@ public class MyViewController extends AView implements  IView , Observer {
         proStage.show();
     }
 
+    /** open help sence.
+     * @param actionEvent press help.
+     * @throws IOException
+     */
     public void help(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Help.fxml"));
         Parent root = fxmlLoader.load();
@@ -344,15 +424,26 @@ public class MyViewController extends AView implements  IView , Observer {
         proStage.show();
     }
 
+    /** called the function that responsible to move the player by the mouse dragging
+     * @param mouseEvent when mouse drag on the screen
+     */
     public void mouseDrag(MouseEvent mouseEvent) {
         viewModel.mouseDrag(mouseEvent, mazeDisplayer);
     }
+
+    /** stop zoom in/out
+     * @param keyEvent realse control
+     */
     public void zoomOut(KeyEvent keyEvent) {
         if(zoom)
             zoom = false;
     }
 
 
+    /** check if control press and may go to zoom in/out.
+     * @param scrollEvent scroll mouse.
+     * @throws FileNotFoundException
+     */
     public void scrollMouse(ScrollEvent scrollEvent) throws FileNotFoundException {
         if(zoom) {
             mazeDisplayer.zoomInOut(scrollEvent);
@@ -360,13 +451,22 @@ public class MyViewController extends AView implements  IView , Observer {
         }
     }
 
+    /** mute the music in the game.
+     * @param actionEvent press on mute checkBox.
+     */
     public void mute(ActionEvent actionEvent) {
-        if(muteButton2.isSelected())
+        if(muteButton2.isSelected()) {
             Main.getMedia().setMute(true);
-        else
+        }
+        else {
             Main.getMedia().setMute(false);
+        }
     }
 
+    /** change he player in the maze.
+     * @param actionEvent choose diffrent player in the main sence.
+     * @throws FileNotFoundException
+     */
     public void changeCharacter(ActionEvent actionEvent) throws FileNotFoundException {
         if (character.getSelectionModel().getSelectedItem().equals("Ash Ketchum")) {
             Image image = null;

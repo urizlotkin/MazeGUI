@@ -32,7 +32,10 @@ public class PropertiesController extends AView implements IView, Observer {
     public void update(Observable o, Object arg) {
 
     }
-
+    /** function that called everytime there is some change in the scene.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // create a input stream
@@ -58,6 +61,11 @@ public class PropertiesController extends AView implements IView, Observer {
 
     }
 
+    /** start changing properties.
+     * @param actionEvent press on set properties.
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void setProperties(ActionEvent actionEvent) throws IOException, InterruptedException {
         String num = numOfThreads.getText();
         if((!(isNumeric(num))) || Integer.valueOf(num) < 1) {
@@ -71,6 +79,10 @@ public class PropertiesController extends AView implements IView, Observer {
         switchSence("MyView.fxml");
     }
 
+    /** back to main screen.
+     * @param actionEvent press back to main screen.
+     * @throws IOException
+     */
     public void newMaze(ActionEvent actionEvent) throws IOException {
         viewModel.setMaze(null);
         switchSence("MyView.fxml");

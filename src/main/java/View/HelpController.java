@@ -21,7 +21,10 @@ public class HelpController extends AView implements IView, Observer {
     public void update(Observable o, Object arg) {
 
     }
-
+    /** function that called everytime there is some change in the scene.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image image = null;

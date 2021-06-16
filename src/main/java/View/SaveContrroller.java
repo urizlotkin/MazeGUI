@@ -22,7 +22,10 @@ public class SaveContrroller extends AView implements IView, Observer {
     public void update(Observable o, Object arg) {
 
     }
-
+    /** function that called everytime there is some change in the scene.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setViewModel(Main.getViewModel());
@@ -43,6 +46,10 @@ public class SaveContrroller extends AView implements IView, Observer {
             this.viewModel.addObserver( this);
     }
 
+    /** tell model to save current maze
+     * @param actionEvent press save maze
+     * @throws IOException
+     */
     public void saveMaze(ActionEvent actionEvent) throws IOException {
       // setViewModel(View.Main.getViewModel());
         String name = mazeName.getText();

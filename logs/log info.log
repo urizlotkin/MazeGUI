@@ -41,3 +41,231 @@
 2021.06.14 16:30:17.038 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
 2021.06.14 16:30:17.044 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
 2021.06.14 16:30:17.044 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.15 16:20:29.312 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.15 16:20:29.316 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.15 16:30:27.650 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.15 16:30:27.653 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.15 16:30:29.418 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.15 16:30:29.424 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.15 16:30:29.425 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.15 16:30:56.848 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.15 16:30:56.849 INFO  Model.MyModel - Maze sizes: rows-20Maze sizes: colums-20
+2021.06.15 16:30:56.850 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.15 16:31:39.954 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.15 16:31:39.956 INFO  Model.MyModel - Maze sizes: rows-20Maze sizes: colums-20
+2021.06.15 16:31:39.956 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.15 16:54:45.482 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.15 16:54:45.486 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.15 16:54:47.181 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.15 16:54:47.187 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.15 16:54:47.187 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.15 17:28:35.129 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.15 17:28:35.132 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.15 17:28:37.544 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.15 17:28:37.553 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.15 17:28:37.553 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 12:05:21.258 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 12:05:21.262 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 12:05:33.772 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 12:05:33.779 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.16 12:05:33.779 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 12:06:43.858 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 12:06:43.861 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:03:18.534 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:03:18.538 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:03:26.474 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:03:26.478 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 13:03:26.479 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:03:37.598 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:03:37.599 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 13:03:37.600 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:03:51.411 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:03:51.412 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 13:03:51.412 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:04:16.435 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:04:16.437 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 13:04:16.437 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:07:37.503 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:07:37.509 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:11:02.438 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:11:02.443 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:14:10.464 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:14:10.468 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:15:02.852 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:15:02.855 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:16:17.001 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:16:17.004 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:18:51.852 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:18:51.856 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:19:17.998 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:19:18.003 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:20:29.852 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:20:29.858 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:22:45.823 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:22:45.826 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:24:14.413 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:24:14.417 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:24:57.510 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:24:57.518 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:25:50.349 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:25:50.352 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:27:53.075 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:27:53.079 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:30:01.855 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:30:01.859 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:30:24.435 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:30:24.438 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:30:51.230 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:30:51.234 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:31:56.659 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:31:56.663 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:32:44.205 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:32:44.208 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:33:06.146 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:33:06.149 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:33:53.442 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:33:53.446 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:35:00.454 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:35:00.458 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:35:02.740 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:35:02.746 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.16 13:35:02.746 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:35:16.331 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:35:16.335 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.16 13:35:16.335 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:35:17.059 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:35:17.063 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.16 13:35:17.064 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:35:23.273 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:35:23.276 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.16 13:35:23.276 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:35:33.110 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:35:33.111 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 13:35:33.112 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:35:53.578 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:35:53.579 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 13:35:53.579 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:37:40.311 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:37:40.314 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:37:48.987 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:37:48.992 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 13:37:48.992 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:38:17.537 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:38:17.542 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:38:31.950 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:38:31.955 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:38:42.214 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:38:42.222 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 13:38:42.222 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:40:20.944 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:40:20.955 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:40:52.113 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:40:52.118 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 13:40:52.119 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:42:05.993 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:42:05.997 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:42:26.140 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:42:26.148 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.16 13:42:26.148 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:42:29.390 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:42:29.392 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 13:42:29.392 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:42:46.587 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:42:46.588 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 13:42:46.588 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:52:40.052 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:52:40.057 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:53:35.767 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:53:35.770 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:53:45.861 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:53:45.866 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 13:53:45.866 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:55:23.770 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:55:23.775 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:55:31.858 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:55:31.864 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 13:55:31.864 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:56:45.903 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:56:45.909 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:56:49.472 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:56:49.478 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:56:57.443 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:56:57.447 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 13:57:06.179 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 13:57:06.184 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 13:57:06.184 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 13:59:56.055 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 13:59:56.058 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 14:00:04.484 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 14:00:04.487 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 14:00:04.488 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 14:00:19.218 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 14:00:19.219 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 14:00:19.220 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 14:00:42.313 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 14:00:42.318 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 14:00:50.934 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 14:00:50.941 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 14:00:50.941 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 14:02:15.380 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 14:02:15.382 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 14:02:24.505 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 14:02:24.510 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 14:02:24.510 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 14:02:49.512 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 14:02:49.513 INFO  Model.MyModel - Maze sizes: rows-10Maze sizes: colums-10
+2021.06.16 14:02:49.513 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 14:03:03.052 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 14:03:03.053 INFO  Model.MyModel - Maze sizes: rows-10Maze sizes: colums-10
+2021.06.16 14:03:03.053 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 14:07:50.551 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 14:07:50.555 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 14:07:54.434 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 14:07:54.438 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 14:07:54.438 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 14:08:39.653 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 14:08:39.656 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 14:08:45.056 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 14:08:45.060 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 14:08:45.061 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 14:10:45.483 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 14:10:45.488 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 14:10:49.488 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 14:10:49.495 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 14:10:49.495 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 14:11:14.147 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 14:11:14.151 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 14:11:18.469 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 14:11:18.473 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 14:11:18.473 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 14:11:34.415 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 14:11:34.417 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 14:11:34.418 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 14:16:45.439 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 14:16:45.442 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 14:16:52.736 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 14:16:52.742 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.16 14:16:52.742 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 21:40:55.379 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 21:40:55.382 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 21:41:02.688 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 21:41:02.694 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.16 21:41:02.694 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 21:41:59.102 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 21:41:59.104 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.16 21:41:59.104 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 21:42:06.350 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 21:42:06.351 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 21:42:06.351 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 21:42:27.154 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 21:42:27.155 INFO  Model.MyModel - Maze sizes: rows-5Maze sizes: colums-5
+2021.06.16 21:42:27.155 INFO  Model.MyModel - Generator maze server finish serve client
+2021.06.16 21:45:07.152 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 21:45:07.155 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 21:45:41.792 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 21:45:41.795 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 21:46:01.762 INFO  Model.MyModel - Generator maze server start to work with port 5400
+2021.06.16 21:46:01.765 INFO  Model.MyModel - Solving maze server start to work with port 5401
+2021.06.16 21:46:23.267 INFO  Model.MyModel - client number: uriPC/192.168.72.1ask from server to generate new maze
+2021.06.16 21:46:23.273 INFO  Model.MyModel - Maze sizes: rows-50Maze sizes: colums-50
+2021.06.16 21:46:23.273 INFO  Model.MyModel - Generator maze server finish serve client
