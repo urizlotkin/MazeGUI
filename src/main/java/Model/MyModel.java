@@ -52,10 +52,10 @@ public class MyModel extends Observable implements IModel {
      */
     @Override
     public void generateMaze(int row, int col) throws UnknownHostException {
-        Client client = new Client(InetAddress.getByName("127.0.0.1"), 5400, new IClientStrategy() {
+        Client client = new Client( InetAddress.getLocalHost()/*InetAddress.getByName("127.0.0.1")*/, 5400, new IClientStrategy() {
             public void clientStrategy(InputStream inFromServer, OutputStream outToServer) {
                 try {
-                    LOG.info("client number: " +InetAddress.getLocalHost() +  "ask from server to generate new maze" );
+                    LOG.info("client number: " +InetAddress.getLocalHost() +  " ask from server to generate new maze" );
                     ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
                     ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                     toServer.flush();
@@ -67,7 +67,7 @@ public class MyModel extends Observable implements IModel {
                     byte[] decompressedMaze = new byte[24 + mazeDimensions[0] * mazeDimensions[1]];
                     is.read(decompressedMaze);
                     maze = new Maze(decompressedMaze);
-                    LOG.info("Maze sizes: rows-"+maze.getRows()+"Maze sizes: colums-"+maze.getColumns());
+                    LOG.info("Maze sizes: rows-"+maze.getRows()+" Maze sizes: colums-"+maze.getColumns());
                     LOG.info("Generator maze server finish serve client");
                 } catch (Exception var10) {
                     var10.printStackTrace();
@@ -86,9 +86,10 @@ public class MyModel extends Observable implements IModel {
      * @throws UnknownHostException
      */
     public void solveMaze() throws UnknownHostException {
-        Client client = new Client(InetAddress.getByName("127.0.0.1"), 5401, new IClientStrategy() {
+        Client client = new Client(InetAddress.getLocalHost()/*InetAddress.getByName("127.0.0.1")*/, 5401, new IClientStrategy() {
             public void clientStrategy(InputStream inFromServer, OutputStream outToServer) {
                 try {
+                    LOG.info("client number: " +InetAddress.getLocalHost() +  " ask from server to solve maze" );
                     ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
                     ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                     toServer.flush();
@@ -101,17 +102,10 @@ public class MyModel extends Observable implements IModel {
 
             }
         });
+        LOG.info("server finish solve maze and serve client");
         client.communicateWithServer();
         setChanged();
         notifyObservers("maze solved");
-    }
-
-    public void saveCurrentMaze() {
-
-    }
-
-    public Maze loadMaze(String name) {
-        return null;
     }
 
 
